@@ -1,4 +1,4 @@
-export type PlanId = "flex" | "starter" | "pro" | "business" | "enterprise";
+export type PlanId = "free" | "starter" | "pro";
 
 export interface Plan {
   id: PlanId;
@@ -7,44 +7,50 @@ export interface Plan {
   commissionPct: number;
   description: string;
   highlight?: boolean;
+  simultaneousEvents: number | string;
+  staff: number | string;
+  analytics: string;
+  waitlist: boolean;
+  onlineDelivery: boolean;
 }
 
 export const PLANS: Plan[] = [
   {
-    id: "flex",
-    name: "Flex (esporádico)",
+    id: "free",
+    name: "Free",
     monthlyUsd: 0,
     commissionPct: 10,
-    description: "Sin mensualidad. Ideal para 1–2 eventos al año.",
+    description: "Valida tu operación sin costo fijo.",
+    simultaneousEvents: 1,
+    staff: 1,
+    analytics: "Resumen: evento activo + 2 recientes",
+    waitlist: false,
+    onlineDelivery: false,
   },
   {
     id: "starter",
     name: "Starter",
-    monthlyUsd: 29,
-    commissionPct: 5,
-    description: "Equipos pequeños con ventas recurrentes.",
+    monthlyUsd: 20,
+    commissionPct: 8,
+    description: "Escala tu operación con mejor margen.",
+    simultaneousEvents: 5,
+    staff: 3,
+    analytics: "Ventas y check-ins: activo + 3 recientes",
+    waitlist: false,
+    onlineDelivery: false,
   },
   {
     id: "pro",
     name: "Pro",
-    monthlyUsd: 79,
-    commissionPct: 3,
-    description: "Waitlist, stock en tiempo real y más control.",
+    monthlyUsd: 40,
+    commissionPct: 5,
+    description: "Operación y analítica completas, sin límites.",
     highlight: true,
-  },
-  {
-    id: "business",
-    name: "Business",
-    monthlyUsd: 199,
-    commissionPct: 1.5,
-    description: "Marca blanca parcial y prioridad en soporte.",
-  },
-  {
-    id: "enterprise",
-    name: "Enterprise",
-    monthlyUsd: null,
-    commissionPct: 0.75,
-    description: ", personalización total y SLA.",
+    simultaneousEvents: "Ilimitados",
+    staff: "Ilimitados",
+    analytics: "Full analytics + overview global + stream en vivo",
+    waitlist: true,
+    onlineDelivery: true,
   },
 ];
 
@@ -57,7 +63,7 @@ export function monthlyCostForPlan(
 }
 
 export function bestPlanForRevenue(monthlyGrossSalesUsd: number): Plan {
-  const candidates = PLANS.filter((p) => p.id !== "enterprise");
+  const candidates = PLANS;
   let best = candidates[0]!;
   let bestCost = monthlyCostForPlan(best, monthlyGrossSalesUsd);
   for (const p of candidates.slice(1)) {
@@ -67,17 +73,14 @@ export function bestPlanForRevenue(monthlyGrossSalesUsd: number): Plan {
       best = p;
     }
   }
-  if (monthlyGrossSalesUsd >= 25_000) {
-    return PLANS.find((p) => p.id === "enterprise")!;
-  }
   return best;
 }
 
-export function savingsVsFlex(
+export function savingsVsFree(
   plan: Plan,
   monthlyGrossSalesUsd: number,
 ): number {
-  const flex = PLANS.find((p) => p.id === "flex")!;
+  const flex = PLANS.find((p) => p.id === "free")!;
   return (
     monthlyCostForPlan(flex, monthlyGrossSalesUsd) -
     monthlyCostForPlan(plan, monthlyGrossSalesUsd)

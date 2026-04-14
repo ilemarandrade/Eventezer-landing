@@ -10,11 +10,11 @@ export function LandingStickyStory() {
         <div className="md:sticky md:top-28 md:self-start">
           <ScrollReveal>
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              Comisiones alineadas a resultados reales
+              Escala tu operación sin escalar el caos
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Menos sorpresas en el cierre de mes: el modelo híbrido premia la
-              escala y mantiene costos predecibles cuando aún estás creciendo.
+              Tu equipo, tus eventos y tus cobros en un solo lugar. El modelo
+              de planes acompaña tu crecimiento y protege margen por ticket.
             </p>
           </ScrollReveal>
         </div>
@@ -23,9 +23,8 @@ export function LandingStickyStory() {
             <div className="flex items-center gap-2">
               <CheckCheckIcon className="h-12 w-12 text-primary" />
               <p>
-                Las suscripciones cubren infraestructura, soporte y evolución
-                del producto. El porcentaje por entrada refleja el valor
-                generado en cada venta concretada.
+                Pasa de procesos dispersos a una operación centralizada: eventos,
+                tickets, métodos de pago, check-ins y aprobaciones.
               </p>
             </div>
           </ScrollReveal>
@@ -33,9 +32,8 @@ export function LandingStickyStory() {
             <div className="flex items-center gap-2">
               <CheckCheckIcon className="h-12 w-12 text-primary" />
               <p>
-                Al subir de plan, reduces el porcentaje efectivo sobre el mismo
-                volumen. Usa la calculadora para ver el punto de equilibrio
-                entre tu ticket promedio y tus ventas mensuales.
+                Delega con seguridad: OWNER/ADMIN operan todo y STAFF trabaja
+                con permisos granulares según su rol.
               </p>
             </div>
           </ScrollReveal>
@@ -43,9 +41,15 @@ export function LandingStickyStory() {
             <div className="flex items-center gap-2">
               <CheckCheckIcon className="h-12 w-12 text-primary" />
               <p>
-                Eventezer está pensado para equipos que operan eventos con
-                frecuencia variable: puedes empezar en Flex y migrar cuando el
-                volumen lo justifique.
+                Empieza en Free y migra cuando tu volumen lo pida. Usa la
+                {" "}
+                <a
+                  href="#calculadora"
+                  className="font-medium text-primary underline underline-offset-4"
+                >
+                  calculadora
+                </a>{" "}
+                para estimar el mejor plan según eventos por mes.
               </p>
             </div>
           </ScrollReveal>

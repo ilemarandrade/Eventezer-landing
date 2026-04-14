@@ -1,7 +1,6 @@
 import { LandingNavbar } from "@/components/landing/landing-navbar";
 import { LandingHero } from "@/components/landing/landing-hero";
-import { LandingSegments } from "@/components/landing/landing-segments";
-import { LandingStickyStory } from "@/components/landing/landing-sticky-story";
+import { LandingGrowthStructure } from "@/components/landing/landing-growth-structure";
 import { LandingPricing } from "@/components/landing/landing-pricing";
 import { LandingCalculator } from "@/components/landing/landing-calculator";
 import { LandingContact } from "@/components/landing/landing-contact";
@@ -14,12 +13,11 @@ export default function HomePage() {
       <LandingNavbar />
       <main>
         <LandingHero />
-        <LandingSegments />
-        <LandingStickyStory />
+        <LandingGrowthStructure />
         <LandingPricing />
         <LandingCalculator />
-        <LandingContact />
         <LandingFaq />
+        <LandingContact />
       </main>
       <LandingFooter />
     </>

@@ -83,17 +83,17 @@ export function LandingContact() {
       <div className="mx-auto max-w-xl">
         <ScrollReveal>
           <h2 className="text-center text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            ¿Dudas sobre el plan Business? Hablemos
+            Lanza tu próximo evento hoy
           </h2>
           <p className="mt-3 text-center text-sm text-muted-foreground">
-            Déjanos tus datos y un mensaje. Te responderemos con condiciones y
-            siguientes pasos.
+            Cuéntanos tu operación y te ayudamos a elegir la mejor configuración
+            para arrancar esta semana.
           </p>
         </ScrollReveal>
         <ScrollReveal delay={0.08} className="mt-10">
           <Card className="border-border bg-card">
             <CardHeader>
-              <CardTitle>Contacto</CardTitle>
+              <CardTitle>Activa tu implementación</CardTitle>
               <CardDescription>
                 Respuesta orientativa en horario laboral.
               </CardDescription>
@@ -211,7 +211,7 @@ export function LandingContact() {
                 </div>
 
                 <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "Enviando…" : "Enviar"}
+                  {isSubmitting ? "Enviando…" : "Quiero empezar ahora"}
                 </Button>
               </form>
             </CardContent>

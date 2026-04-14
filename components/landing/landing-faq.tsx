@@ -10,20 +10,20 @@ import { ScrollReveal } from "@/components/landing/scroll-reveal";
 
 const faqs = [
   {
-    q: "¿Cobran comisión si el ticket cuesta $0?",
-    a: "No hay comisión sobre el precio del ticket si es gratuito. Los cargos fijos del plan (si aplica) siguen según tu suscripción. Revisa siempre el detalle del plan al contratar.",
+    q: "¿Cómo sé qué plan me conviene?",
+    a: "Usa la sección Calculadora con tus eventos por mes, tickets por evento y precio promedio. Te sugerimos el plan con menor costo total estimado (suscripción + comisión).",
   },
   {
     q: "¿Cuándo se aplica la comisión por entrada?",
-    a: "Solo sobre órdenes en estado APPROVED. Reservas, pendientes de pago o canceladas no generan comisión de venta.",
+    a: "Solo sobre órdenes en estado APROBADO. Reservas, pendientes de pago o canceladas no generan comisión.",
   },
   {
     q: "¿Puedo cambiar de plan en cualquier momento?",
-    a: "Sí. El cambio se refleja en el siguiente ciclo de facturación; las comisiones se calculan con el porcentaje vigente del plan activo en el momento de aprobar cada orden.",
+    a: "Sí. Puedes empezar en Free y migrar a Starter o Pro cuando tu volumen crezca. El cambio se refleja en tu siguiente ciclo de facturación.",
   },
   {
-    q: "¿Se pierden datos si bajo de plan?",
-    a: "Tus datos se conservan. Algunas funciones avanzadas pueden quedar en solo lectura o limitadas hasta que vuelvas a un plan que las incluya.",
+    q: "¿Qué gano al subir de plan?",
+    a: "Más eventos activos, más staff, menor comisión por ticket y acceso a funciones avanzadas como analítica completa, waitlist avanzada y entrega online en Pro.",
   },
 ];
 
@@ -36,7 +36,15 @@ export function LandingFaq() {
             Preguntas frecuentes
           </h2>
           <p className="mt-3 text-center text-muted-foreground">
-            Reglas de negocio que suelen decidir el plan adecuado.
+            Lo esencial para elegir plan y escalar con control. Tambien puedes ir
+            directo a la{" "}
+            <a
+              href="#calculadora"
+              className="font-medium text-primary underline underline-offset-4"
+            >
+              calculadora
+            </a>
+            .
           </p>
         </ScrollReveal>
         <ScrollReveal delay={0.08} className="mt-10">

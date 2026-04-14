@@ -6,28 +6,28 @@ import {
   StaggerItem,
   StaggerReveal,
 } from "@/components/landing/scroll-reveal";
-import { Building2, Rocket, Users, Zap } from "lucide-react";
+import { BarChart3, Rocket, Users, Zap } from "lucide-react";
 
 const segments = [
   {
     icon: Rocket,
-    title: "Organizadores esporádicos",
-    body: "Riesgo cero: sin mensualidad obligatoria en el plan Flex. Ideal para probar la plataforma con pocos eventos.",
+    title: "Primeros organizadores",
+    body: "Empieza en Free sin costo mensual para validar tu operación y vender tu primer evento con estructura profesional.",
   },
   {
     icon: Users,
-    title: "Regulares",
-    body: "Staff colaborativo, roles y permisos. Ahorra comisión al consolidar volumen con Starter o Pro.",
+    title: "Equipos en crecimiento",
+    body: "Con Starter operas varios eventos al mes, delegas en staff y mejoras margen con una comisión más baja.",
   },
   {
     icon: Zap,
-    title: "Profesionales",
-    body: "Waitlist, stock en tiempo real y flujos de pago alineados a tu operación diaria.",
+    title: "Operaciones profesionales",
+    body: "Pro desbloquea analítica completa, waitlist avanzada y entrega online para escalar sin límites.",
   },
   {
-    icon: Building2,
-    title: "Enterprise",
-    body: "Personalización total de branding  y condiciones comerciales dedicadas para grandes productores.",
+    icon: BarChart3,
+    title: "Orientados a resultados",
+    body: "Mide ventas, check-ins y retención para convertir cada evento en decisiones de crecimiento y rentabilidad.",
   },
 ];
 

@@ -10,19 +10,30 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { BadgeCheck, CheckCircle2 } from "lucide-react";
 
 export function LandingPricing() {
   return (
-    <section id="precios" className="border-b border-border bg-muted/30 px-4 py-16 sm:py-20">
+    <section
+      id="precios"
+      className="border-b border-border bg-muted/30 px-4 py-16 sm:py-20"
+    >
       <div className="mx-auto max-w-6xl">
         <ScrollReveal>
           <h2 className="text-center text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Planes y comisiones
+            Planes para cada etapa de crecimiento
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-muted-foreground">
-            Precio mensual + porcentaje por entrada. La comisión se aplica solo
-            cuando la orden está en estado <strong className="text-foreground">APPROVED</strong>.
+            Empieza en Free y reduce comisión a medida que escalas. La comisión
+            se aplica solo cuando la orden está en estado{" "}
+            <strong className="text-foreground">APROBADO</strong>.
           </p>
         </ScrollReveal>
 
@@ -31,7 +42,14 @@ export function LandingPricing() {
             <CardHeader className="pb-2">
               <CardTitle>Comparativa rápida</CardTitle>
               <CardDescription>
-                Montos referenciales en USD. Ajusta volumen en la calculadora más abajo.
+                Montos en USD. Usa la{" "}
+                <a
+                  href="#calculadora"
+                  className="font-medium text-primary underline underline-offset-4"
+                >
+                  calculadora
+                </a>{" "}
+                para estimar el punto de equilibrio según eventos por mes.
               </CardDescription>
             </CardHeader>
             <CardContent className="p-0 sm:p-6 sm:pt-0">
@@ -40,7 +58,9 @@ export function LandingPricing() {
                   <TableRow>
                     <TableHead>Plan</TableHead>
                     <TableHead className="text-right">Mensual</TableHead>
-                    <TableHead className="text-right">Comisión / entrada</TableHead>
+                    <TableHead className="text-right">
+                      Comisión / entrada
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -76,7 +96,7 @@ export function LandingPricing() {
         </ScrollReveal>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {PLANS.filter((p) => p.id !== "enterprise").map((p) => (
+          {PLANS.map((p) => (
             <ScrollReveal key={p.id} delay={0.05}>
               <Card
                 className={`h-full border-border ${
@@ -84,22 +104,61 @@ export function LandingPricing() {
                 }`}
               >
                 <CardHeader>
-                  <CardTitle className="text-lg">{p.name}</CardTitle>
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                      <BadgeCheck className="h-4 w-4" />
+                    </span>
+                    {p.name}
+                  </CardTitle>
                   <CardDescription>{p.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-1 text-sm">
-                  <p className="text-foreground">
-                    <span className="text-muted-foreground">Mensual: </span>
-                    {p.monthlyUsd === 0
-                      ? "Gratis"
-                      : p.monthlyUsd === null
-                        ? "Custom"
-                        : `$${p.monthlyUsd}`}
+                <CardContent className="text-sm">
+                  <p className="mb-3 font-medium text-foreground">
+                    Lo que incluye este plan
                   </p>
-                  <p className="text-foreground">
-                    <span className="text-muted-foreground">Comisión: </span>
-                    {p.commissionPct}%
-                  </p>
+                  <ul className="space-y-2">
+                    <li className="flex items-start gap-2 text-foreground">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <span>
+                        <span className="text-muted-foreground">
+                          Eventos activos simultáneos:
+                        </span>{" "}
+                        {p.simultaneousEvents}
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2 text-foreground">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <span>
+                        <span className="text-muted-foreground">Staff:</span>{" "}
+                        {p.staff}
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2 text-foreground">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <span>
+                        <span className="text-muted-foreground">Analítica:</span>{" "}
+                        {p.analytics}
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2 text-foreground">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <span>
+                        <span className="text-muted-foreground">
+                          Waitlist avanzada:
+                        </span>{" "}
+                        {p.waitlist ? "Sí" : "No"}
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2 text-foreground">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <span>
+                        <span className="text-muted-foreground">
+                          Entrega online:
+                        </span>{" "}
+                        {p.onlineDelivery ? "Sí" : "No"}
+                      </span>
+                    </li>
+                  </ul>
                 </CardContent>
               </Card>
             </ScrollReveal>
