@@ -32,6 +32,7 @@ export default function RootLayout({
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9331970861016684"
         crossOrigin="anonymous"
+        strategy="lazyOnload"
       />
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen font-sans antialiased`}
