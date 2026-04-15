@@ -9,20 +9,26 @@ export function LandingFooter() {
           © {new Date().getFullYear()} Eventezer. Todos los derechos reservados.
         </p>
         <div className="flex gap-6 text-sm">
-          <a
-            href={APP_REGISTER_URL}
-            className="text-primary hover:underline"
-          >
+          <a href={APP_REGISTER_URL} className="text-primary hover:underline">
             Registro
           </a>
-          <a href={APP_LOGIN_URL} className="text-muted-foreground hover:text-foreground">
+          <a
+            href={APP_LOGIN_URL}
+            className="text-muted-foreground hover:text-foreground"
+          >
             Login
           </a>
-          <Link href="#faq" className="text-muted-foreground hover:text-foreground">
+          <Link
+            href="#faq"
+            className="text-muted-foreground hover:text-foreground"
+          >
             FAQ
           </Link>
-          <Link href="/politica-de-privacidad" className="text-muted-foreground hover:text-foreground">
-            Privacidad
+          <Link
+            href="/politica-de-privacidad"
+            className="text-muted-foreground hover:text-foreground"
+          >
+            Política de Privacidad
           </Link>
         </div>
       </div>
