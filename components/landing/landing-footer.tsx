@@ -21,6 +21,9 @@ export function LandingFooter() {
           <Link href="#faq" className="text-muted-foreground hover:text-foreground">
             FAQ
           </Link>
+          <Link href="/politica-de-privacidad" className="text-muted-foreground hover:text-foreground">
+            Privacidad
+          </Link>
         </div>
       </div>
     </footer>
