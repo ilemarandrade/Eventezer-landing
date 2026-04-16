@@ -18,7 +18,21 @@ export async function submitContact(input: unknown): Promise<ContactState> {
     };
   }
 
-  await new Promise((r) => setTimeout(r, 1000));
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/lead-inquiries`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(parsed.data),
+    },
+  );
+
+  if (!res.ok) {
+    return {
+      ok: false,
+      message: "No pudimos enviar tu mensaje. Intenta de nuevo más tarde.",
+    };
+  }
 
   return {
     ok: true,
