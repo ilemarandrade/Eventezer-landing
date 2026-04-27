@@ -21,8 +21,8 @@ export default function HomePage() {
         <LandingProductPreview />
         <LandingPricing />
         <LandingCalculator />
-        <LandingFaq />
         <LandingServiceCta />
+        <LandingFaq />
         <LandingContact />
       </main>
       <LandingFooter />
