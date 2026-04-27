@@ -2,6 +2,7 @@
   "name": "eventezer-landing",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@9.15.9",
   "scripts": {
     "dev": "next dev -p 3010",
     "build": "next build",
