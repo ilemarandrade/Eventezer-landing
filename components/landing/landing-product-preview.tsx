@@ -103,14 +103,14 @@ export function LandingProductPreview() {
                       src={current.image}
                       alt={current.imageAlt}
                       fill
-                      className="object-cover object-top dark:hidden"
+                      className="object-contain dark:hidden"
                       sizes="(min-width: 1280px) 560px, (min-width: 1024px) 48vw, 100vw"
                     />
                     <Image
                       src={current.imageDark ?? current.image}
                       alt={current.imageAlt}
                       fill
-                      className="hidden object-cover object-top dark:block"
+                      className="hidden object-contain dark:block"
                       sizes="(min-width: 1280px) 560px, (min-width: 1024px) 48vw, 100vw"
                     />
                   </>
