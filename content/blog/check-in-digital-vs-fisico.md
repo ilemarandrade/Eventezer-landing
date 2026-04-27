@@ -4,6 +4,7 @@ description: "Comparamos el control de acceso digital y físico en eventos para 
 date: "2025-05-01"
 category: "Tips"
 readingTime: "5 min"
+coverImage: "/images/blog/check-in-digital.png"
 ---
 
 El momento del check-in es uno de los más críticos en cualquier evento. Una cola larga, un proceso confuso o un error en la lista puede arruinar la primera impresión del asistente antes de que el evento siquiera comience. La pregunta que muchos organizadores se hacen es: ¿check-in digital o físico?

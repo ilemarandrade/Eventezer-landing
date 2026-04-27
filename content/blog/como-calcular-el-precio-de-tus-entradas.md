@@ -4,6 +4,7 @@ description: "Aprende a fijar el precio de tus tickets de forma estratégica, co
 date: "2025-04-20"
 category: "Tips"
 readingTime: "6 min"
+coverImage: "/images/blog/precio-entradas.png"
 ---
 
 Uno de los errores más frecuentes al organizar un evento es fijar el precio de las entradas por intuición o copiando lo que cobran otros. El precio de tu ticket no es un número arbitrario: es el resultado de entender tus costos, conocer a tu audiencia y comunicar bien el valor que ofreces.

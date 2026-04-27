@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
@@ -21,6 +22,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} · Eventezer Blog`,
     description: post.description,
+    openGraph: post.coverImage
+      ? { images: [{ url: post.coverImage, width: 1200, height: 630 }] }
+      : undefined,
   };
 }
 
@@ -61,6 +65,19 @@ export default async function BlogPostPage({ params }: Props) {
             {post.title}
           </h1>
           <p className="mt-4 text-lg text-muted-foreground">{post.description}</p>
+
+          {post.coverImage && (
+            <div className="relative mt-8 h-64 w-full overflow-hidden rounded-2xl sm:h-80">
+              <Image
+                src={post.coverImage}
+                alt={post.title}
+                fill
+                className="object-cover object-top"
+                sizes="(min-width: 672px) 672px, 100vw"
+                priority
+              />
+            </div>
+          )}
 
           <div className="mt-10 prose prose-neutral dark:prose-invert max-w-none">
             <Markdown remarkPlugins={[remarkGfm]}>{post.content}</Markdown>

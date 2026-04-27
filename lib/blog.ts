@@ -9,6 +9,7 @@ export type Post = {
   date: string;
   category: string;
   readingTime: string;
+  coverImage?: string;
   content: string;
 };
 
@@ -32,6 +33,7 @@ export function getAllPosts(): PostMeta[] {
         date: data.date as string,
         category: data.category as string,
         readingTime: data.readingTime as string,
+        coverImage: (data.coverImage as string) ?? undefined,
       };
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
