@@ -25,7 +25,7 @@ export const PLANS: Plan[] = [
     staff: 1,
     analytics: "Resumen: evento activo + 2 recientes",
     waitlist: false,
-    onlineDelivery: false,
+    onlineDelivery: true,
   },
   {
     id: "starter",
@@ -37,7 +37,7 @@ export const PLANS: Plan[] = [
     staff: 3,
     analytics: "Ventas y check-ins: activo + 3 recientes",
     waitlist: false,
-    onlineDelivery: false,
+    onlineDelivery: true,
   },
   {
     id: "pro",
