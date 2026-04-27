@@ -23,7 +23,23 @@ const faqs = [
   },
   {
     q: "¿Qué gano al subir de plan?",
-    a: "Más eventos activos, más staff, menor comisión por ticket y acceso a funciones avanzadas como analítica completa, waitlist avanzada y entrega online en Pro.",
+    a: "Más eventos activos simultáneos, más staff, menor comisión por ticket y acceso a funciones avanzadas como analítica completa y waitlist avanzada en Pro.",
+  },
+  {
+    q: "¿Cómo recibe el asistente su entrada?",
+    a: "Al completar la compra, el asistente recibe automáticamente un correo con su entrada y código QR. Esto aplica en todos los planes sin configuración adicional.",
+  },
+  {
+    q: "¿Qué pasa si un asistente pierde o no encuentra su entrada?",
+    a: "El organizador puede reenviar la entrada o validar al asistente manualmente desde el panel de control sin necesidad de cancelar ni reemitir la orden.",
+  },
+  {
+    q: "¿Puedo crear entradas gratuitas?",
+    a: "Sí. Puedes crear tipos de ticket con precio $0 para eventos de registro gratuito. Las entradas gratuitas no generan comisión.",
+  },
+  {
+    q: "¿Puedo cambiar el precio de las entradas después de publicar?",
+    a: "Sí. Puedes modificar el precio de un tipo de ticket en cualquier momento. El cambio aplica a nuevas ventas y no afecta órdenes ya aprobadas.",
   },
 ];
 
