@@ -12,6 +12,8 @@ const links = [
   { href: "#caracteristicas", label: "Características" },
   { href: "#precios", label: "Precios" },
   { href: "#faq", label: "FAQ" },
+  { href: "/blog", label: "Blog" },
+  { href: "/sobre-nosotros", label: "Sobre nosotros" },
 ];
 
 export function LandingNavbar() {

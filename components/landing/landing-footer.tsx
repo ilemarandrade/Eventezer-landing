@@ -25,6 +25,18 @@ export function LandingFooter() {
             FAQ
           </Link>
           <Link
+            href="/blog"
+            className="text-muted-foreground hover:text-foreground"
+          >
+            Blog
+          </Link>
+          <Link
+            href="/sobre-nosotros"
+            className="text-muted-foreground hover:text-foreground"
+          >
+            Sobre nosotros
+          </Link>
+          <Link
             href="/politica-de-privacidad"
             className="text-muted-foreground hover:text-foreground"
           >
