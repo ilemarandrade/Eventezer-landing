@@ -77,7 +77,7 @@ export function LandingPersonas() {
           </p>
         </ScrollReveal>
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-2">
+        <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_1px_1fr]">
           <ScrollReveal delay={0.02}>
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-primary">
               Para personas naturales
@@ -100,6 +100,10 @@ export function LandingPersonas() {
               ))}
             </StaggerReveal>
           </ScrollReveal>
+
+          {/* divisor vertical en desktop, horizontal en mobile */}
+          <div className="hidden lg:block w-px bg-border self-stretch" />
+          <div className="block lg:hidden h-px w-full bg-border" />
 
           <ScrollReveal delay={0.06}>
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-primary">
