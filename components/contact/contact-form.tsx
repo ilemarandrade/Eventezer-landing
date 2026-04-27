@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
@@ -23,14 +23,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CustomSelect } from "@/components/ui/select";
 
-const defaultValues: ContactFormValues = {
-  name: "",
-  email: "",
-  organizationType: "",
-  message: "",
-};
-
-export function ContactForm() {
+export function ContactForm({ defaultMessage = "" }: { defaultMessage?: string }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -38,12 +31,17 @@ export function ContactForm() {
     handleSubmit,
     reset,
     setError,
+    setValue,
     formState: { errors },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
-    defaultValues,
+    defaultValues: { name: "", email: "", organizationType: "", message: defaultMessage },
     mode: "onTouched",
   });
+
+  useEffect(() => {
+    if (defaultMessage) setValue("message", defaultMessage);
+  }, [defaultMessage, setValue]);
 
   async function onSubmit(data: ContactFormValues) {
     setIsSubmitting(true);
@@ -52,7 +50,7 @@ export function ContactForm() {
 
       if (result.ok) {
         toast.success(result.message);
-        reset(defaultValues);
+        reset({ name: "", email: "", organizationType: "", message: "" });
         return;
       }
 

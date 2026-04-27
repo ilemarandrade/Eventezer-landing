@@ -1,7 +1,15 @@
 "use client";
 
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { ScrollReveal } from "@/components/landing/scroll-reveal";
 import { ContactForm } from "@/components/contact/contact-form";
+
+function ContactFormWithParams() {
+  const params = useSearchParams();
+  const defaultMessage = params.get("mensaje") ?? "";
+  return <ContactForm defaultMessage={defaultMessage} />;
+}
 
 export function LandingContact() {
   return (
@@ -17,7 +25,9 @@ export function LandingContact() {
           </p>
         </ScrollReveal>
         <ScrollReveal delay={0.08} className="mt-10">
-          <ContactForm />
+          <Suspense fallback={<ContactForm />}>
+            <ContactFormWithParams />
+          </Suspense>
         </ScrollReveal>
       </div>
     </section>

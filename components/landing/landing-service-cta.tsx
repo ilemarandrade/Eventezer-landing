@@ -1,4 +1,7 @@
 import Link from "next/link";
+
+const SERVICE_MESSAGE =
+  "Hola, me interesa obtener información sobre el servicio de equipo operativo. ¿Podrían encargarse de la logística, check-in y staff para mi evento?";
 import { HeadphonesIcon } from "lucide-react";
 import { ScrollReveal } from "@/components/landing/scroll-reveal";
 
@@ -20,7 +23,7 @@ export function LandingServiceCta() {
               accesos. Tú enfócate en el contenido, nosotros en la operación.
             </p>
             <Link
-              href="/#contacto"
+              href={`/?mensaje=${encodeURIComponent(SERVICE_MESSAGE)}#contacto`}
               className="mt-6 inline-flex items-center rounded-lg bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
             >
               Consultar este servicio
