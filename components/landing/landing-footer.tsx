@@ -19,7 +19,7 @@ export function LandingFooter() {
             Login
           </a>
           <Link
-            href="#faq"
+            href="/#faq"
             className="text-muted-foreground hover:text-foreground"
           >
             FAQ

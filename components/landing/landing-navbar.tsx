@@ -9,9 +9,9 @@ import { APP_LOGIN_URL, APP_REGISTER_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { href: "#caracteristicas", label: "Características" },
-  { href: "#precios", label: "Precios" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#caracteristicas", label: "Características" },
+  { href: "/#precios", label: "Precios" },
+  { href: "/#faq", label: "FAQ" },
   { href: "/blog", label: "Blog" },
   { href: "/sobre-nosotros", label: "Sobre nosotros" },
 ];
