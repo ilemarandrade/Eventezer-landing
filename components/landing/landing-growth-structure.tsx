@@ -191,7 +191,7 @@ export function LandingGrowthStructure() {
             <ScrollReveal delay={0.08}>
               <div className="mx-auto w-full overflow-hidden rounded-2xl border border-border/80 bg-card shadow-xl shadow-primary/10">
                 <Image
-                  src="/images/eventezer-light.png"
+                  src="/images/eventezer-light.jpg"
                   alt="Vista del módulo de ticketing de Eventezer en modo claro."
                   width={1919}
                   height={995}
@@ -199,7 +199,7 @@ export function LandingGrowthStructure() {
                   className="h-auto w-full object-cover dark:hidden"
                 />
                 <Image
-                  src="/images/eventezer-dark.png"
+                  src="/images/eventezer-dark.jpg"
                   alt="Vista del módulo de ticketing de Eventezer en modo oscuro."
                   width={1919}
                   height={996}
