@@ -18,12 +18,6 @@ export const metadata: Metadata = {
   title: "Eventezer — Gestión de tickets para eventos",
   description:
     "Plataforma de gestión de tickets para organizadores: suscripción + comisión solo en ventas aprobadas.",
-  icons: {
-    icon: [
-      { url: "/logos/logo-light.ico", media: "(prefers-color-scheme: light)" },
-      { url: "/logos/logo-dark.ico", media: "(prefers-color-scheme: dark)" },
-    ],
-  },
 };
 
 export default function RootLayout({
