@@ -153,9 +153,9 @@ export function LandingPricing() {
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                       <span>
                         <span className="text-muted-foreground">
-                          Entrega online:
+                          Entrega de entradas:
                         </span>{" "}
-                        {p.onlineDelivery ? "Sí" : "No"}
+                        Por correo en todos los planes
                       </span>
                     </li>
                   </ul>
