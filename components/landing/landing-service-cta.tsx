@@ -1,9 +1,12 @@
-import Link from "next/link";
+'use client';
+
+import Link from 'next/link';
+import { trackPixelEvent } from '@/lib/pixel';
 
 const SERVICE_MESSAGE =
-  "Hola, me interesa obtener información sobre el servicio de equipo operativo. ¿Podrían encargarse de la logística, check-in y staff para mi evento?";
-import { HeadphonesIcon } from "lucide-react";
-import { ScrollReveal } from "@/components/landing/scroll-reveal";
+  'Hola, me interesa obtener información sobre el servicio de equipo operativo. ¿Podrían encargarse de la logística, check-in y staff para mi evento?';
+import { HeadphonesIcon } from 'lucide-react';
+import { ScrollReveal } from '@/components/landing/scroll-reveal';
 
 export function LandingServiceCta() {
   return (
@@ -18,13 +21,14 @@ export function LandingServiceCta() {
               ¿No tienes equipo para el día del evento?
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-              Podemos encargarnos de todo lo necesario para llevar a cabo tu
-              evento: coordinación, check-in, staff en puerta y control de
-              accesos. Tú enfócate en el contenido, nosotros en la operación.
+              Podemos encargarnos de todo lo necesario para llevar a cabo tu evento: coordinación,
+              check-in, staff en puerta y control de accesos. Tú enfócate en el contenido, nosotros
+              en la operación.
             </p>
             <Link
               href={`/?mensaje=${encodeURIComponent(SERVICE_MESSAGE)}#contacto`}
               className="mt-6 inline-flex items-center rounded-lg bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              onClick={() => trackPixelEvent('Contact')}
             >
               Consultar este servicio
             </Link>

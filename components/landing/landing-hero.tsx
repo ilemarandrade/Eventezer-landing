@@ -1,19 +1,20 @@
-"use client";
+'use client';
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { MagneticButton } from "@/components/landing/magnetic-button";
-import { ScrollReveal } from "@/components/landing/scroll-reveal";
-import { APP_REGISTER_URL, DEMO_URL } from "@/lib/constants";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { MagneticButton } from '@/components/landing/magnetic-button';
+import { ScrollReveal } from '@/components/landing/scroll-reveal';
+import { APP_REGISTER_URL, DEMO_URL } from '@/lib/constants';
+import { ArrowRight, Sparkles } from 'lucide-react';
+import { trackPixelEvent, trackCustomPixelEvent } from '@/lib/pixel';
 
 export function LandingHero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"],
+    offset: ['start start', 'end start'],
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
@@ -39,10 +40,9 @@ export function LandingHero() {
           style={{ y }}
           className="mx-auto mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg"
         >
-          Eventezer unifica publicación, ticketing, pagos, check-ins y analítica
-          en una sola plataforma. Empieza gratis y reduce comisión al escalar;
-          solo cobramos comisión cuando la orden queda{" "}
-          <strong className="text-foreground">APROBADO</strong>.
+          Eventezer unifica publicación, ticketing, pagos, check-ins y analítica en una sola
+          plataforma. Empieza gratis y reduce comisión al escalar; solo cobramos comisión cuando la
+          orden queda <strong className="text-foreground">APROBADO</strong>.
         </motion.p>
         <ScrollReveal delay={0.12} className="mx-auto mt-10 max-w-5xl">
           <div className="overflow-hidden rounded-2xl border border-border/80 bg-card shadow-2xl shadow-primary/10">
@@ -72,19 +72,16 @@ export function LandingHero() {
         >
           <MagneticButton>
             <Button size="lg" className="rounded-full px-8" asChild>
-              <a href={APP_REGISTER_URL}>
+              <a href={APP_REGISTER_URL} onClick={() => trackPixelEvent('InitiateCheckout')}>
                 Crear mi evento gratis
                 <ArrowRight className="h-4 w-4" />
               </a>
             </Button>
           </MagneticButton>
-          <Button
-            size="lg"
-            variant="outline"
-            className="rounded-full px-8"
-            asChild
-          >
-            <a href={DEMO_URL}>Ver Demo</a>
+          <Button size="lg" variant="outline" className="rounded-full px-8" asChild>
+            <a href={DEMO_URL} onClick={() => trackCustomPixelEvent('ViewDemo')}>
+              Ver Demo
+            </a>
           </Button>
         </ScrollReveal>
       </div>

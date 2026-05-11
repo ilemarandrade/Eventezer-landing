@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
+import { trackPixelEvent } from '@/lib/pixel';
 import {
   contactFormSchema,
   contactOrganizationOptions,
@@ -18,6 +19,7 @@ import { CustomSelect } from '@/components/ui/select';
 
 export function ContactForm({ defaultMessage = '' }: { defaultMessage?: string }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const hasFiredContact = useRef(false);
 
   const {
     control,
@@ -49,6 +51,7 @@ export function ContactForm({ defaultMessage = '' }: { defaultMessage?: string }
         return;
       }
 
+      trackPixelEvent('Lead');
       toast.success('Gracias. Nuestro equipo revisará tu mensaje y te contactará pronto.');
       reset({ name: '', email: '', organizationType: '', message: '' });
     } catch {
@@ -78,6 +81,12 @@ export function ContactForm({ defaultMessage = '' }: { defaultMessage?: string }
                   placeholder="Tu nombre"
                   aria-invalid={Boolean(errors.name)}
                   disabled={isSubmitting}
+                  onFocus={() => {
+                    if (!hasFiredContact.current) {
+                      hasFiredContact.current = true;
+                      trackPixelEvent('Contact');
+                    }
+                  }}
                   {...field}
                 />
               )}

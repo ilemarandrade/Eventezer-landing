@@ -8,9 +8,7 @@ export const FacebookPixel = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    // @ts-ignore
     if (window?.fbq) {
-      // @ts-ignore
       window.fbq('track', 'PageView');
     }
   }, [pathname]);

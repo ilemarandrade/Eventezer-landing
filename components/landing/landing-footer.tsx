@@ -1,5 +1,8 @@
-import Link from "next/link";
-import { APP_LOGIN_URL, APP_REGISTER_URL } from "@/lib/constants";
+'use client';
+
+import Link from 'next/link';
+import { APP_LOGIN_URL, APP_REGISTER_URL } from '@/lib/constants';
+import { trackPixelEvent } from '@/lib/pixel';
 
 export function LandingFooter() {
   return (
@@ -9,31 +12,23 @@ export function LandingFooter() {
           © {new Date().getFullYear()} Eventezer. Todos los derechos reservados.
         </p>
         <div className="flex gap-6 text-sm">
-          <a href={APP_REGISTER_URL} className="text-primary hover:underline">
+          <a
+            href={APP_REGISTER_URL}
+            className="text-primary hover:underline"
+            onClick={() => trackPixelEvent('InitiateCheckout')}
+          >
             Registro
           </a>
-          <a
-            href={APP_LOGIN_URL}
-            className="text-muted-foreground hover:text-foreground"
-          >
+          <a href={APP_LOGIN_URL} className="text-muted-foreground hover:text-foreground">
             Login
           </a>
-          <Link
-            href="/#faq"
-            className="text-muted-foreground hover:text-foreground"
-          >
+          <Link href="/#faq" className="text-muted-foreground hover:text-foreground">
             FAQ
           </Link>
-          <Link
-            href="/blog"
-            className="text-muted-foreground hover:text-foreground"
-          >
+          <Link href="/blog" className="text-muted-foreground hover:text-foreground">
             Blog
           </Link>
-          <Link
-            href="/sobre-nosotros"
-            className="text-muted-foreground hover:text-foreground"
-          >
+          <Link href="/sobre-nosotros" className="text-muted-foreground hover:text-foreground">
             Sobre nosotros
           </Link>
           <Link

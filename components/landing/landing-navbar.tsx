@@ -1,19 +1,20 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { LogoSwitcher } from "@/components/landing/logo-switcher";
-import { Button } from "@/components/ui/button";
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
-import { APP_LOGIN_URL, APP_REGISTER_URL } from "@/lib/constants";
-import { cn } from "@/lib/utils";
+import Link from 'next/link';
+import { LogoSwitcher } from '@/components/landing/logo-switcher';
+import { Button } from '@/components/ui/button';
+import { Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { APP_LOGIN_URL, APP_REGISTER_URL } from '@/lib/constants';
+import { cn } from '@/lib/utils';
+import { trackPixelEvent } from '@/lib/pixel';
 
 const links = [
-  { href: "/#caracteristicas", label: "Características" },
-  { href: "/#precios", label: "Precios" },
-  { href: "/#faq", label: "FAQ" },
-  { href: "/blog", label: "Blog" },
-  { href: "/sobre-nosotros", label: "Sobre nosotros" },
+  { href: '/#caracteristicas', label: 'Características' },
+  { href: '/#precios', label: 'Precios' },
+  { href: '/#faq', label: 'FAQ' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/sobre-nosotros', label: 'Sobre nosotros' },
 ];
 
 export function LandingNavbar() {
@@ -25,11 +26,7 @@ export function LandingNavbar() {
         <LogoSwitcher />
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
           {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="transition-colors hover:text-foreground"
-            >
+            <Link key={l.href} href={l.href} className="transition-colors hover:text-foreground">
               {l.label}
             </Link>
           ))}
@@ -40,9 +37,7 @@ export function LandingNavbar() {
             size="icon"
             type="button"
             aria-label="Cambiar tema"
-            onClick={() =>
-              setTheme(resolvedTheme === "dark" ? "light" : "dark")
-            }
+            onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
             className="relative text-foreground"
           >
             <Sun className="h-[1.1rem] w-[1.1rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -52,7 +47,9 @@ export function LandingNavbar() {
             <a href={APP_LOGIN_URL}>Login</a>
           </Button>
           <Button size="sm" asChild>
-            <a href={APP_REGISTER_URL}>Registrarme</a>
+            <a href={APP_REGISTER_URL} onClick={() => trackPixelEvent('InitiateCheckout')}>
+              Registrarme
+            </a>
           </Button>
         </div>
       </div>
@@ -65,7 +62,11 @@ export function LandingNavbar() {
         <a href={APP_LOGIN_URL} className="whitespace-nowrap">
           Login
         </a>
-        <a href={APP_REGISTER_URL} className={cn("whitespace-nowrap text-primary")}>
+        <a
+          href={APP_REGISTER_URL}
+          className={cn('whitespace-nowrap text-primary')}
+          onClick={() => trackPixelEvent('InitiateCheckout')}
+        >
           Registrarme
         </a>
       </nav>
