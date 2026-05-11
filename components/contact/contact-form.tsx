@@ -1,71 +1,58 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
-import { submitContact } from "@/app/actions/contact";
+import { useState, useEffect } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 import {
   contactFormSchema,
   contactOrganizationOptions,
   type ContactFormValues,
-} from "@/components/contact/contact-form-schema";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { CustomSelect } from "@/components/ui/select";
+} from '@/components/contact/contact-form-schema';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { CustomSelect } from '@/components/ui/select';
 
-export function ContactForm({ defaultMessage = "" }: { defaultMessage?: string }) {
+export function ContactForm({ defaultMessage = '' }: { defaultMessage?: string }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     control,
     handleSubmit,
     reset,
-    setError,
     setValue,
     formState: { errors },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
-    defaultValues: { name: "", email: "", organizationType: "", message: defaultMessage },
-    mode: "onTouched",
+    defaultValues: { name: '', email: '', organizationType: '', message: defaultMessage },
+    mode: 'onTouched',
   });
 
   useEffect(() => {
-    if (defaultMessage) setValue("message", defaultMessage);
+    if (defaultMessage) setValue('message', defaultMessage);
   }, [defaultMessage, setValue]);
 
   async function onSubmit(data: ContactFormValues) {
     setIsSubmitting(true);
     try {
-      const result = await submitContact(data);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/lead-inquiries`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
 
-      if (result.ok) {
-        toast.success(result.message);
-        reset({ name: "", email: "", organizationType: "", message: "" });
+      if (!res.ok) {
+        toast.error('No pudimos enviar tu mensaje. Intenta de nuevo más tarde.');
         return;
       }
 
-      toast.error(result.message);
-
-      if (result.fieldErrors) {
-        const entries = Object.entries(result.fieldErrors) as [
-          keyof ContactFormValues,
-          string[] | undefined,
-        ][];
-        for (const [key, msgs] of entries) {
-          const msg = msgs?.[0];
-          if (msg) setError(key, { type: "server", message: msg });
-        }
-      }
+      toast.success('Gracias. Nuestro equipo revisará tu mensaje y te contactará pronto.');
+      reset({ name: '', email: '', organizationType: '', message: '' });
+    } catch {
+      toast.error('No pudimos enviar tu mensaje. Intenta de nuevo más tarde.');
     } finally {
       setIsSubmitting(false);
     }
@@ -141,9 +128,7 @@ export function ContactForm({ defaultMessage = "" }: { defaultMessage?: string }
               )}
             />
             {errors.organizationType?.message && (
-              <p className="text-xs text-destructive">
-                {errors.organizationType.message}
-              </p>
+              <p className="text-xs text-destructive">{errors.organizationType.message}</p>
             )}
           </div>
 
@@ -169,7 +154,7 @@ export function ContactForm({ defaultMessage = "" }: { defaultMessage?: string }
           </div>
 
           <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? "Enviando…" : "Quiero empezar ahora"}
+            {isSubmitting ? 'Enviando…' : 'Quiero empezar ahora'}
           </Button>
         </form>
       </CardContent>
