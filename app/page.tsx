@@ -21,7 +21,8 @@ export default function HomePage() {
       <div className="relative">
         <LandingAroDecor />
         <LandingCilindroDecor />
-        <LandingConoDecor />
+        <LandingConoDecor side="right" />
+        <LandingConoDecor side="left" />
         <main className="relative z-10">
           <LandingHero />
           <div className="relative">
