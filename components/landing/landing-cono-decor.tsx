@@ -1,8 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { useDecorParallax } from '@/components/landing/use-decor-parallax';
+import { DecorParallaxLayer, useDecorParallax } from '@/components/landing/use-decor-parallax';
 import { cn } from '@/lib/utils';
 
 type ConoSide = 'left' | 'right';
@@ -20,19 +19,19 @@ export function LandingConoDecor({ side = 'right' }: { side?: ConoSide }) {
     <div
       aria-hidden
       className={cn(
-        'pointer-events-none fixed bottom-8 z-0 hidden h-[min(40vh,360px)] w-[min(24vw,200px)] md:bottom-12 md:block lg:w-[min(22vw,220px)]',
+        'pointer-events-none fixed bottom-4 z-0 block h-[min(26vh,200px)] w-[min(30vw,110px)] sm:bottom-8 sm:h-[min(34vh,280px)] sm:w-[min(26vw,160px)] md:bottom-12 md:h-[min(40vh,360px)] md:w-[min(24vw,200px)] lg:w-[min(22vw,220px)]',
         side === 'right' ? 'right-0 lg:right-6' : 'left-0 lg:left-6',
       )}
     >
-      <motion.div style={{ y }} className="relative h-full w-full">
+      <DecorParallaxLayer y={y} className="relative h-full w-full">
         <Image
           src="/images/cono.jpg"
           alt=""
           width={793}
           height={1122}
-          sizes="(min-width: 768px) 200px, 0px"
+          sizes="(min-width: 768px) 200px, 110px"
           className={cn(
-            'h-full w-full object-contain opacity-80 dark:opacity-65',
+            'h-full w-full object-contain opacity-55 dark:opacity-45 sm:opacity-70 sm:dark:opacity-55 md:opacity-80 md:dark:opacity-65',
             side === 'right' ? 'object-right' : 'object-left',
           )}
         />
@@ -44,7 +43,7 @@ export function LandingConoDecor({ side = 'right' }: { side?: ConoSide }) {
               : 'bg-gradient-to-r from-background via-background/80 to-transparent',
           )}
         />
-      </motion.div>
+      </DecorParallaxLayer>
     </div>
   );
 }

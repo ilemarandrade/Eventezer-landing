@@ -18,7 +18,7 @@ export default function HomePage() {
   return (
     <>
       <LandingNavbar />
-      <div className="relative">
+      <div className="relative overflow-x-hidden">
         <LandingAroDecor />
         <LandingCilindroDecor />
         <LandingConoDecor side="right" />
