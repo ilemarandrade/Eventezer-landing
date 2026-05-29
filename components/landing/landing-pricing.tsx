@@ -1,7 +1,10 @@
-"use client";
+'use client';
 
-import { PLANS } from "@/lib/pricing";
-import { ScrollReveal } from "@/components/landing/scroll-reveal";
+import { useRef, useEffect } from 'react';
+import { useInView } from 'framer-motion';
+import { PLANS } from '@/lib/pricing';
+import { ScrollReveal } from '@/components/landing/scroll-reveal';
+import { trackPixelEvent } from '@/lib/pixel';
 import {
   Table,
   TableBody,
@@ -9,19 +12,21 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { BadgeCheck, CheckCircle2 } from "lucide-react";
+} from '@/components/ui/table';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { BadgeCheck, CheckCircle2 } from 'lucide-react';
 
 export function LandingPricing() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+
+  useEffect(() => {
+    if (isInView) trackPixelEvent('ViewContent', { content_name: 'pricing' });
+  }, [isInView]);
+
   return (
     <section
+      ref={sectionRef}
       id="precios"
       className="border-b border-border bg-muted/30 px-4 py-16 sm:py-20"
     >
@@ -31,9 +36,8 @@ export function LandingPricing() {
             Planes para cada etapa de crecimiento
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-muted-foreground">
-            Empieza en Free y reduce comisión a medida que escalas. La comisión
-            se aplica solo cuando la orden está en estado{" "}
-            <strong className="text-foreground">APROBADO</strong>.
+            Empieza en Free y reduce comisión a medida que escalas. La comisión se aplica solo
+            cuando la orden está en estado <strong className="text-foreground">APROBADO</strong>.
           </p>
         </ScrollReveal>
 
@@ -42,13 +46,13 @@ export function LandingPricing() {
             <CardHeader className="pb-2">
               <CardTitle>Comparativa rápida</CardTitle>
               <CardDescription>
-                Montos en USD. Usa la{" "}
+                Montos en USD. Usa la{' '}
                 <a
                   href="#calculadora"
                   className="font-medium text-primary underline underline-offset-4"
                 >
                   calculadora
-                </a>{" "}
+                </a>{' '}
                 para estimar el punto de equilibrio según eventos por mes.
               </CardDescription>
             </CardHeader>
@@ -58,17 +62,12 @@ export function LandingPricing() {
                   <TableRow>
                     <TableHead>Plan</TableHead>
                     <TableHead className="text-right">Mensual</TableHead>
-                    <TableHead className="text-right">
-                      Comisión / entrada
-                    </TableHead>
+                    <TableHead className="text-right">Comisión / entrada</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {PLANS.map((p) => (
-                    <TableRow
-                      key={p.id}
-                      className={p.highlight ? "bg-accent/40" : undefined}
-                    >
+                    <TableRow key={p.id} className={p.highlight ? 'bg-accent/40' : undefined}>
                       <TableCell className="font-medium">
                         {p.name}
                         {p.highlight ? (
@@ -79,14 +78,12 @@ export function LandingPricing() {
                       </TableCell>
                       <TableCell className="text-right tabular-nums">
                         {p.monthlyUsd === null
-                          ? "A medida"
+                          ? 'A medida'
                           : p.monthlyUsd === 0
-                            ? "$0"
+                            ? '$0'
                             : `$${p.monthlyUsd}`}
                       </TableCell>
-                      <TableCell className="text-right tabular-nums">
-                        {p.commissionPct}%
-                      </TableCell>
+                      <TableCell className="text-right tabular-nums">{p.commissionPct}%</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -99,9 +96,7 @@ export function LandingPricing() {
           {PLANS.map((p) => (
             <ScrollReveal key={p.id} delay={0.05}>
               <Card
-                className={`h-full border-border ${
-                  p.highlight ? "ring-2 ring-primary/40" : ""
-                }`}
+                className={`h-full border-border ${p.highlight ? 'ring-2 ring-primary/40' : ''}`}
               >
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-lg">
@@ -113,49 +108,39 @@ export function LandingPricing() {
                   <CardDescription>{p.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="text-sm">
-                  <p className="mb-3 font-medium text-foreground">
-                    Lo que incluye este plan
-                  </p>
+                  <p className="mb-3 font-medium text-foreground">Lo que incluye este plan</p>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2 text-foreground">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                       <span>
-                        <span className="text-muted-foreground">
-                          Eventos activos simultáneos:
-                        </span>{" "}
+                        <span className="text-muted-foreground">Eventos activos simultáneos:</span>{' '}
                         {p.simultaneousEvents}
                       </span>
                     </li>
                     <li className="flex items-start gap-2 text-foreground">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                       <span>
-                        <span className="text-muted-foreground">Staff:</span>{" "}
-                        {p.staff}
+                        <span className="text-muted-foreground">Staff:</span> {p.staff}
                       </span>
                     </li>
                     <li className="flex items-start gap-2 text-foreground">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                       <span>
-                        <span className="text-muted-foreground">Analítica:</span>{" "}
-                        {p.analytics}
+                        <span className="text-muted-foreground">Analítica:</span> {p.analytics}
                       </span>
                     </li>
                     <li className="flex items-start gap-2 text-foreground">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                       <span>
-                        <span className="text-muted-foreground">
-                          Waitlist avanzada:
-                        </span>{" "}
-                        {p.waitlist ? "Sí" : "No"}
+                        <span className="text-muted-foreground">Waitlist avanzada:</span>{' '}
+                        {p.waitlist ? 'Sí' : 'No'}
                       </span>
                     </li>
                     <li className="flex items-start gap-2 text-foreground">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                       <span>
-                        <span className="text-muted-foreground">
-                          Entrega de entradas:
-                        </span>{" "}
-                        Por correo en todos los planes
+                        <span className="text-muted-foreground">Entrega de entradas:</span> Por
+                        correo en todos los planes
                       </span>
                     </li>
                   </ul>

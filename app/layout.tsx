@@ -1,27 +1,28 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Toaster } from "sonner";
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import { Toaster } from 'sonner';
+import { ThemeProvider } from '@/components/providers/theme-provider';
+import './globals.css';
+import { FacebookPixel } from '@/components/pixel/FaceboookPixel';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Eventezer — Gestión de tickets para eventos",
+  title: 'Eventezer — Gestión de tickets para eventos',
   description:
-    "Plataforma de gestión de tickets para organizadores: suscripción + comisión solo en ventas aprobadas.",
+    'Plataforma de gestión de tickets para organizadores: suscripción + comisión solo en ventas aprobadas.',
   icons: {
     icon: [
-      { url: "/logos/logo-light.ico", media: "(prefers-color-scheme: light)" },
-      { url: "/logos/logo-dark.ico", media: "(prefers-color-scheme: dark)" },
+      { url: '/logos/logo-dark.ico', media: '(prefers-color-scheme: light)' },
+      { url: '/logos/logo-light.ico', media: '(prefers-color-scheme: dark)' },
     ],
   },
 };
@@ -34,10 +35,7 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
-        <meta
-          name="google-adsense-account"
-          content="ca-pub-9331970861016684"
-        ></meta>
+        <meta name="google-adsense-account" content="ca-pub-9331970861016684"></meta>
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9331970861016684"
@@ -48,6 +46,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen font-sans antialiased`}
       >
         <ThemeProvider>
+          <FacebookPixel />
           {children}
           <Toaster richColors position="top-center" closeButton />
         </ThemeProvider>

@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
-import { LandingNavbar } from "@/components/landing/landing-navbar";
-import { LandingFooter } from "@/components/landing/landing-footer";
-import { APP_REGISTER_URL } from "@/lib/constants";
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { getAllPosts, getPostBySlug } from '@/lib/blog';
+import { LandingNavbar } from '@/components/landing/landing-navbar';
+import { LandingFooter } from '@/components/landing/landing-footer';
+import { RegisterLink } from '@/components/landing/register-link';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -53,10 +53,10 @@ export default async function BlogPostPage({ params }: Props) {
             <span>{post.readingTime} de lectura</span>
             <span>·</span>
             <span>
-              {new Date(post.date).toLocaleDateString("es-ES", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
+              {new Date(post.date).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
               })}
             </span>
           </div>
@@ -90,12 +90,9 @@ export default async function BlogPostPage({ params }: Props) {
             <p className="mt-2 text-sm text-muted-foreground">
               Crea tu cuenta gratis en Eventezer y empieza a vender entradas hoy.
             </p>
-            <a
-              href={APP_REGISTER_URL}
-              className="mt-4 inline-flex items-center rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
-            >
+            <RegisterLink className="mt-4 inline-flex items-center rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90">
               Crear mi evento gratis
-            </a>
+            </RegisterLink>
           </div>
         </article>
       </main>
