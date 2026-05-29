@@ -48,9 +48,9 @@ export function LandingCalculator() {
           </p>
         </ScrollReveal>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-2">
-          <ScrollReveal>
-            <Card className="border-border bg-card">
+        <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,30rem)_minmax(0,40rem)] lg:items-stretch">
+          <ScrollReveal className="min-w-0">
+            <Card className="h-full border-border bg-card">
               <CardHeader>
                 <CardTitle className="text-lg">Tus supuestos</CardTitle>
               </CardHeader>
@@ -117,9 +117,9 @@ export function LandingCalculator() {
             </Card>
           </ScrollReveal>
 
-          <ScrollReveal delay={0.06}>
+          <ScrollReveal delay={0.06} className="min-w-0 w-full max-w-2xl">
             <LayoutGroup>
-              <Card className="relative overflow-hidden border-border bg-card">
+              <Card className="relative h-full w-full min-h-0 border-border bg-card">
                 <motion.div
                   layoutId="plan-highlight"
                   className="pointer-events-none absolute inset-0 rounded-lg bg-primary/5"
@@ -138,29 +138,39 @@ export function LandingCalculator() {
                     <p className="text-sm text-muted-foreground">Plan sugerido</p>
                     <p className="text-2xl font-bold text-foreground">{recommended.name}</p>
                   </motion.div>
-                  <div className="grid gap-3 sm:grid-cols-3">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:items-stretch">
                     {planComparisons.map((plan) => {
                       const isRecommended = plan.id === recommended.id;
                       return (
                         <div
                           key={plan.id}
-                          className={`rounded-lg border p-3 transition-colors ${
+                          className={`flex h-full min-h-0 flex-col rounded-lg border p-4 transition-colors ${
                             isRecommended
                               ? 'border-primary bg-primary/10'
                               : 'border-border bg-muted/30'
                           }`}
                         >
-                          <p className="text-md text-muted-foreground">{plan.name}</p>
+                          <p className="text-sm text-muted-foreground">{plan.name}</p>
                           <p className="mt-1 text-lg font-semibold tabular-nums text-foreground">
                             {formatUsd(plan.estimatedCost)}
                           </p>
                           <p className="mt-1 text-xs text-muted-foreground">por mes estimado</p>
-                          <p className="mt-2 text-[13px] text-foreground">
-                            Mensualidad: {formatUsd(plan.monthlyFee)}
-                          </p>
-                          <p className="text-[13px] text-foreground">
-                            Comisión ({plan.commissionPct}%): {formatUsd(plan.commissionCost)}
-                          </p>
+                          <dl className="mt-3 space-y-2 text-xs text-foreground sm:text-[13px]">
+                            <div className="flex items-baseline justify-between gap-2">
+                              <dt className="min-w-0 text-muted-foreground">Mensualidad:</dt>
+                              <dd className="shrink-0 tabular-nums font-medium">
+                                {formatUsd(plan.monthlyFee)}
+                              </dd>
+                            </div>
+                            <div className="flex items-baseline justify-between gap-2">
+                              <dt className="min-w-0 text-muted-foreground">
+                                Comisión ({plan.commissionPct}%):
+                              </dt>
+                              <dd className="shrink-0 tabular-nums font-medium">
+                                {formatUsd(plan.commissionCost)}
+                              </dd>
+                            </div>
+                          </dl>
                         </div>
                       );
                     })}
