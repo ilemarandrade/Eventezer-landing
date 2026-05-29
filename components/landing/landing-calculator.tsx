@@ -1,32 +1,29 @@
-"use client";
+'use client';
 
-import { useMemo, useState } from "react";
-import { motion, LayoutGroup } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { ScrollReveal } from "@/components/landing/scroll-reveal";
-import { NumberTicker } from "@/components/landing/number-ticker";
-import { PLANS, bestPlanForRevenue, monthlyCostForPlan } from "@/lib/pricing";
+import { useMemo, useState } from 'react';
+import { motion, LayoutGroup } from 'framer-motion';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { ScrollReveal } from '@/components/landing/scroll-reveal';
+import { NumberTicker } from '@/components/landing/number-ticker';
+import { PLANS, bestPlanForRevenue, monthlyCostForPlan } from '@/lib/pricing';
 
 function formatUsd(n: number) {
-  return n.toLocaleString("es-ES", {
-    style: "currency",
-    currency: "USD",
+  return n.toLocaleString('es-ES', {
+    style: 'currency',
+    currency: 'USD',
     maximumFractionDigits: 0,
   });
 }
 
 export function LandingCalculator() {
   const [eventsPerMonth, setEventsPerMonth] = useState(6);
-  const [ticketsPerEvent, setTicketsPerEvent] = useState(140);
+  const [ticketsPerEvent, setTicketsPerEvent] = useState(100);
   const [avgPrice, setAvgPrice] = useState(45);
 
   const monthlyTickets = eventsPerMonth * ticketsPerEvent;
   const monthlyGross = monthlyTickets * avgPrice;
-  const recommended = useMemo(
-    () => bestPlanForRevenue(monthlyGross),
-    [monthlyGross],
-  );
+  const recommended = useMemo(() => bestPlanForRevenue(monthlyGross), [monthlyGross]);
   const planComparisons = useMemo(
     () =>
       PLANS.map((plan) => ({
@@ -39,19 +36,15 @@ export function LandingCalculator() {
   );
 
   return (
-    <section
-      id="calculadora"
-      className="border-b border-border bg-background px-4 py-16 sm:py-20"
-    >
+    <section id="calculadora" className="border-b border-border bg-background px-4 py-16 sm:py-20">
       <div className="mx-auto max-w-6xl">
         <ScrollReveal>
           <h2 className="text-center text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Calculadora de ahorro
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-center text-muted-foreground">
-            Ajusta eventos por mes, tickets por evento y precio promedio. Te
-            sugerimos el plan con menor costo total estimado (suscripción +
-            comisión).
+            Ajusta eventos por mes, tickets por evento y precio promedio. Te sugerimos el plan con
+            menor costo total estimado (suscripción + comisión).
           </p>
         </ScrollReveal>
 
@@ -65,9 +58,7 @@ export function LandingCalculator() {
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
                     <Label htmlFor="eventsPerMonth">Eventos por mes</Label>
-                    <span className="tabular-nums text-muted-foreground">
-                      {eventsPerMonth}
-                    </span>
+                    <span className="tabular-nums text-muted-foreground">{eventsPerMonth}</span>
                   </div>
                   <input
                     id="eventsPerMonth"
@@ -83,9 +74,7 @@ export function LandingCalculator() {
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
                     <Label htmlFor="ticketsPerEvent">Tickets por evento</Label>
-                    <span className="tabular-nums text-muted-foreground">
-                      {ticketsPerEvent}
-                    </span>
+                    <span className="tabular-nums text-muted-foreground">{ticketsPerEvent}</span>
                   </div>
                   <input
                     id="ticketsPerEvent"
@@ -101,9 +90,7 @@ export function LandingCalculator() {
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
                     <Label htmlFor="price">Precio promedio (USD)</Label>
-                    <span className="tabular-nums text-muted-foreground">
-                      ${avgPrice}
-                    </span>
+                    <span className="tabular-nums text-muted-foreground">${avgPrice}</span>
                   </div>
                   <input
                     id="price"
@@ -117,15 +104,11 @@ export function LandingCalculator() {
                   />
                 </div>
                 <div className="rounded-lg border border-border bg-muted/50 p-4 text-sm">
-                  <p className="text-muted-foreground">
-                    Tickets estimados al mes
-                  </p>
+                  <p className="text-muted-foreground">Tickets estimados al mes</p>
                   <p className="text-xl font-semibold text-foreground tabular-nums">
                     <NumberTicker value={monthlyTickets} />
                   </p>
-                  <p className="mt-3 text-muted-foreground">
-                    Ventas brutas mensuales
-                  </p>
+                  <p className="mt-3 text-muted-foreground">Ventas brutas mensuales</p>
                   <p className="text-xl font-semibold text-foreground tabular-nums">
                     <NumberTicker value={monthlyGross} prefix="$" />
                   </p>
@@ -140,7 +123,7 @@ export function LandingCalculator() {
                 <motion.div
                   layoutId="plan-highlight"
                   className="pointer-events-none absolute inset-0 rounded-lg bg-primary/5"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                 />
                 <CardHeader className="relative">
                   <CardTitle className="text-lg">Recomendación</CardTitle>
@@ -152,12 +135,8 @@ export function LandingCalculator() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <p className="text-sm text-muted-foreground">
-                      Plan sugerido
-                    </p>
-                    <p className="text-2xl font-bold text-foreground">
-                      {recommended.name}
-                    </p>
+                    <p className="text-sm text-muted-foreground">Plan sugerido</p>
+                    <p className="text-2xl font-bold text-foreground">{recommended.name}</p>
                   </motion.div>
                   <div className="grid gap-3 sm:grid-cols-3">
                     {planComparisons.map((plan) => {
@@ -167,25 +146,20 @@ export function LandingCalculator() {
                           key={plan.id}
                           className={`rounded-lg border p-3 transition-colors ${
                             isRecommended
-                              ? "border-primary bg-primary/10"
-                              : "border-border bg-muted/30"
+                              ? 'border-primary bg-primary/10'
+                              : 'border-border bg-muted/30'
                           }`}
                         >
-                          <p className="text-md text-muted-foreground">
-                            {plan.name}
-                          </p>
+                          <p className="text-md text-muted-foreground">{plan.name}</p>
                           <p className="mt-1 text-lg font-semibold tabular-nums text-foreground">
                             {formatUsd(plan.estimatedCost)}
                           </p>
-                          <p className="mt-1 text-xs text-muted-foreground">
-                            por mes estimado
-                          </p>
+                          <p className="mt-1 text-xs text-muted-foreground">por mes estimado</p>
                           <p className="mt-2 text-[13px] text-foreground">
                             Mensualidad: {formatUsd(plan.monthlyFee)}
                           </p>
                           <p className="text-[13px] text-foreground">
-                            Comisión ({plan.commissionPct}%):{" "}
-                            {formatUsd(plan.commissionCost)}
+                            Comisión ({plan.commissionPct}%): {formatUsd(plan.commissionCost)}
                           </p>
                         </div>
                       );
