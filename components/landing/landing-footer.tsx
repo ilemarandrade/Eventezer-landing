@@ -3,10 +3,11 @@
 import Link from 'next/link';
 import { APP_LOGIN_URL, APP_REGISTER_URL } from '@/lib/constants';
 import { trackPixelEvent } from '@/lib/pixel';
+import { cn } from '@/lib/utils';
 
-export function LandingFooter() {
+export function LandingFooter({ className }: { className?: string }) {
   return (
-    <footer className="border-t border-border bg-card px-4 py-10">
+    <footer className={cn('border-t border-border bg-card px-4 py-10', className)}>
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 sm:flex-row">
         <p className="text-sm text-muted-foreground">
           © {new Date().getFullYear()} Eventezer. Todos los derechos reservados.
