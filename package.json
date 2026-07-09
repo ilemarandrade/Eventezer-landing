@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3010",
     "build": "next build",
+    "dev": "next dev -p 3010",
     "start": "next start -p 3010",
     "lint": "eslint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
@@ -19,6 +23,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@opennextjs/cloudflare": "^1.20.1",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-slot": "^1.2.4",
@@ -52,6 +57,7 @@
     "prettier": "^3.8.3",
     "tailwindcss": "^3.4.19",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "wrangler": "^4.109.0"
   }
 }
