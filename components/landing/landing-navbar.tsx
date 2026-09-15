@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { LogoSwitcher } from '@/components/landing/logo-switcher';
+import { CountrySwitcher } from '@/components/landing/country-switcher';
 import { Button } from '@/components/ui/button';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
@@ -21,7 +22,7 @@ export function LandingNavbar() {
   const { setTheme, resolvedTheme } = useTheme();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
         <LogoSwitcher />
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
@@ -32,6 +33,7 @@ export function LandingNavbar() {
           ))}
         </nav>
         <div className="flex items-center gap-2 sm:gap-3">
+          <CountrySwitcher className="hidden sm:flex" />
           <Button
             variant="ghost"
             size="icon"
@@ -53,22 +55,25 @@ export function LandingNavbar() {
           </Button>
         </div>
       </div>
-      <nav className="flex md:hidden border-t border-border px-4 py-2 gap-4 overflow-x-auto text-xs font-medium text-muted-foreground">
-        {links.map((l) => (
-          <Link key={l.href} href={l.href} className="whitespace-nowrap">
-            {l.label}
-          </Link>
-        ))}
-        <a href={APP_LOGIN_URL} className="whitespace-nowrap">
-          Login
-        </a>
-        <a
-          href={APP_REGISTER_URL}
-          className={cn('whitespace-nowrap text-primary')}
-          onClick={() => trackPixelEvent('InitiateCheckout')}
-        >
-          Registrarme
-        </a>
+      <nav className="flex md:hidden items-center justify-between gap-2 border-t border-border px-4 py-2 text-xs font-medium text-muted-foreground">
+        <div className="flex items-center gap-4 overflow-x-auto">
+          {links.map((l) => (
+            <Link key={l.href} href={l.href} className="whitespace-nowrap">
+              {l.label}
+            </Link>
+          ))}
+          <a href={APP_LOGIN_URL} className="whitespace-nowrap">
+            Login
+          </a>
+          <a
+            href={APP_REGISTER_URL}
+            className={cn('whitespace-nowrap text-primary')}
+            onClick={() => trackPixelEvent('InitiateCheckout')}
+          >
+            Registrarme
+          </a>
+        </div>
+        <CountrySwitcher className="shrink-0" />
       </nav>
     </header>
   );
