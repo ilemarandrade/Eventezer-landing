@@ -55,13 +55,15 @@ export function LandingCalculator() {
       })),
     [plans, monthlyGross],
   );
+  const recommendedComparison = planComparisons.find((p) => p.id === recommended.id)!;
+  const recommendedNet = monthlyGross - recommendedComparison.estimatedCost;
 
   return (
     <section id="calculadora" className="border-b border-border bg-background px-4 py-16 sm:py-20">
       <div className="mx-auto max-w-6xl">
         <ScrollReveal>
           <h2 className="text-center text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Calculadora de ahorro
+            Calcula tu plan y tus ganancias
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-center text-muted-foreground">
             Ajusta eventos por mes, tickets por evento y precio promedio. Te sugerimos el plan con
@@ -148,8 +150,12 @@ export function LandingCalculator() {
                   className="pointer-events-none absolute inset-0 rounded-lg bg-primary/5"
                   transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                 />
-                <CardHeader className="relative">
+                <CardHeader className="relative pb-2">
                   <CardTitle className="text-lg">Recomendación</CardTitle>
+                  <p className="text-xs text-muted-foreground">
+                    Estos montos son lo que le pagarías a Eventezer cada mes (suscripción +
+                    comisión). El resto de tus ventas brutas es tuyo.
+                  </p>
                 </CardHeader>
                 <CardContent className="relative space-y-4">
                   <motion.div
@@ -161,6 +167,27 @@ export function LandingCalculator() {
                     <p className="text-sm text-muted-foreground">Plan sugerido</p>
                     <p className="text-2xl font-bold text-foreground">{recommended.name}</p>
                   </motion.div>
+
+                  {/* Comparativo compacto: lo que pagas a Eventezer vs. lo que te queda a ti */}
+                  <div className="grid grid-cols-1 divide-y divide-primary/20 rounded-lg border border-primary/30 bg-primary/5 text-center sm:grid-cols-2 sm:divide-x sm:divide-y-0">
+                    <div className="px-3 py-3">
+                      <p className="text-xs text-muted-foreground">Pagas a Eventezer / mes</p>
+                      <p className="mt-1 text-xl font-bold tabular-nums text-foreground">
+                        {formatAmount(recommendedComparison.estimatedCost)}
+                      </p>
+                    </div>
+                    <div className="px-3 py-3">
+                      <p className="text-xs text-muted-foreground">Te queda a ti / mes</p>
+                      <p className="mt-1 text-xl font-bold tabular-nums text-primary">
+                        {formatAmount(recommendedNet)}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    De tus <strong className="text-foreground">{formatAmount(monthlyGross)}</strong>{' '}
+                    en ventas brutas estimadas con el plan {recommended.name}.
+                  </p>
+
                   <div className="grid gap-3 sm:grid-cols-3">
                     {planComparisons.map((plan) => {
                       const isRecommended = plan.id === recommended.id;
@@ -177,7 +204,9 @@ export function LandingCalculator() {
                           <p className="mt-1 text-lg font-semibold tabular-nums text-foreground">
                             {formatAmount(plan.estimatedCost)}
                           </p>
-                          <p className="mt-1 text-xs text-muted-foreground">por mes estimado</p>
+                          <p className="mt-1 text-xs text-muted-foreground">
+                            pagas a Eventezer/mes
+                          </p>
                           <p className="mt-2 text-[13px] text-foreground">
                             Mensualidad: {formatAmount(plan.monthlyFee)}
                           </p>
