@@ -222,13 +222,15 @@ export default function PrivacyPolicyColombiaPage() {
         </ul>
         <p className="text-muted-foreground">
           <strong className="text-foreground">Declaración de tratamiento transfronterizo:</strong>{' '}
-          {SERVICE_NAME} opera su infraestructura tecnológica desde Venezuela. En consecuencia, los
-          datos personales de titulares en Colombia pueden ser transmitidos y almacenados fuera del
-          territorio colombiano para efectos de la prestación del servicio. Este tratamiento se
-          realiza bajo los mismos estándares de seguridad y confidencialidad descritos en este
-          Aviso, y solo para las finalidades aquí autorizadas.{' '}
+          La infraestructura tecnológica de la Plataforma opera sobre servicios de alojamiento en la
+          nube (actualmente Railway), cuyos servidores pueden estar ubicados fuera del territorio
+          colombiano. En consecuencia, los datos personales de titulares en Colombia pueden ser
+          transmitidos y almacenados en el extranjero para efectos de la prestación del servicio.
+          Este tratamiento se realiza bajo los mismos estándares de seguridad y confidencialidad
+          descritos en este Aviso, y solo para las finalidades aquí autorizadas.{' '}
           <LegalPlaceholder>
-            VERIFICAR — si aplica un contrato de transmisión internacional de datos conforme al
+            VERIFICAR — país/región exacta de los servidores del proveedor de alojamiento en la nube
+            utilizado, y si aplica un contrato de transmisión internacional de datos conforme al
             régimen de la SIC para transferencias fuera de Colombia
           </LegalPlaceholder>
           .
