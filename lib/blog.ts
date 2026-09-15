@@ -1,6 +1,7 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import type { Country } from '@/lib/country';
 
 export type Post = {
   slug: string;
@@ -10,21 +11,23 @@ export type Post = {
   category: string;
   readingTime: string;
   coverImage?: string;
+  /** Países a los que aplica este post. Si se omite, se muestra en todos. */
+  countries?: Country[];
   content: string;
 };
 
-export type PostMeta = Omit<Post, "content">;
+export type PostMeta = Omit<Post, 'content'>;
 
-const POSTS_DIR = path.join(process.cwd(), "content/blog");
+const POSTS_DIR = path.join(process.cwd(), 'content/blog');
 
 export function getAllPosts(): PostMeta[] {
   if (!fs.existsSync(POSTS_DIR)) return [];
   return fs
     .readdirSync(POSTS_DIR)
-    .filter((f) => f.endsWith(".md"))
+    .filter((f) => f.endsWith('.md'))
     .map((file) => {
-      const slug = file.replace(/\.md$/, "");
-      const raw = fs.readFileSync(path.join(POSTS_DIR, file), "utf8");
+      const slug = file.replace(/\.md$/, '');
+      const raw = fs.readFileSync(path.join(POSTS_DIR, file), 'utf8');
       const { data } = matter(raw);
       return {
         slug,
@@ -34,6 +37,7 @@ export function getAllPosts(): PostMeta[] {
         category: data.category as string,
         readingTime: data.readingTime as string,
         coverImage: (data.coverImage as string) ?? undefined,
+        countries: (data.countries as Country[]) ?? undefined,
       };
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -42,7 +46,7 @@ export function getAllPosts(): PostMeta[] {
 export function getPostBySlug(slug: string): Post | null {
   const filePath = path.join(POSTS_DIR, `${slug}.md`);
   if (!fs.existsSync(filePath)) return null;
-  const raw = fs.readFileSync(filePath, "utf8");
+  const raw = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(raw);
   return {
     slug,
@@ -51,6 +55,8 @@ export function getPostBySlug(slug: string): Post | null {
     date: data.date as string,
     category: data.category as string,
     readingTime: data.readingTime as string,
+    coverImage: (data.coverImage as string) ?? undefined,
+    countries: (data.countries as Country[]) ?? undefined,
     content,
   };
 }

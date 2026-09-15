@@ -11,7 +11,7 @@ import {
   type ContactFormValues,
 } from '@/components/contact/contact-form-schema';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -64,7 +64,7 @@ export function ContactForm({ defaultMessage = '' }: { defaultMessage?: string }
   return (
     <Card className="border-border bg-card">
       <CardHeader>
-        <CardTitle>Activa tu implementación</CardTitle>
+        {/* <CardTitle>Activa tu implementación</CardTitle> */}
         <CardDescription>Respuesta orientativa en horario laboral.</CardDescription>
       </CardHeader>
       <CardContent>
@@ -97,7 +97,7 @@ export function ContactForm({ defaultMessage = '' }: { defaultMessage?: string }
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email corporativo</Label>
+            <Label htmlFor="email">Email</Label>
             <Controller
               name="email"
               control={control}
@@ -106,7 +106,7 @@ export function ContactForm({ defaultMessage = '' }: { defaultMessage?: string }
                   id="email"
                   type="email"
                   autoComplete="email"
-                  placeholder="tu@empresa.com"
+                  placeholder="tu@email.com"
                   aria-invalid={Boolean(errors.email)}
                   disabled={isSubmitting}
                   {...field}
@@ -119,7 +119,7 @@ export function ContactForm({ defaultMessage = '' }: { defaultMessage?: string }
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="organizationType">Tipo de organización</Label>
+            <Label htmlFor="organizationType">¿Qué tipo de organizador eres?</Label>
             <Controller
               name="organizationType"
               control={control}
@@ -130,7 +130,7 @@ export function ContactForm({ defaultMessage = '' }: { defaultMessage?: string }
                   value={field.value}
                   onChange={field.onChange}
                   onBlur={field.onBlur}
-                  placeholder="¿Qué tipo de organización eres?"
+                  placeholder="Selecciona una opción"
                   aria-invalid={Boolean(errors.organizationType)}
                   disabled={isSubmitting}
                 />
@@ -149,7 +149,7 @@ export function ContactForm({ defaultMessage = '' }: { defaultMessage?: string }
               render={({ field }) => (
                 <Textarea
                   id="message"
-                  placeholder="Cuéntanos volumen aproximado, ciudades, integraciones…"
+                  placeholder="Cuéntanos volumen aproximado, ciudades, objetivos, etc…"
                   rows={4}
                   aria-invalid={Boolean(errors.message)}
                   disabled={isSubmitting}

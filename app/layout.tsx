@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/components/providers/theme-provider';
+import { CountryProvider } from '@/components/providers/country-provider';
+import { CountrySelectDialog } from '@/components/landing/country-select-dialog';
 import './globals.css';
 import { FacebookPixel } from '@/components/pixel/FaceboookPixel';
 
@@ -46,9 +48,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen font-sans antialiased`}
       >
         <ThemeProvider>
-          <FacebookPixel />
-          {children}
-          <Toaster richColors position="top-center" closeButton />
+          <CountryProvider>
+            <FacebookPixel />
+            {children}
+            <CountrySelectDialog />
+            <Toaster richColors position="top-center" closeButton />
+          </CountryProvider>
         </ThemeProvider>
       </body>
     </html>
