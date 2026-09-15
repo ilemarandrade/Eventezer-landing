@@ -1,9 +1,5 @@
 import type { Metadata } from 'next';
-import {
-  LegalPageLayout,
-  LegalPlaceholder,
-  LegalReviewNotice,
-} from '@/components/legal/legal-page-layout';
+import { LegalPageLayout } from '@/components/legal/legal-page-layout';
 
 export const metadata: Metadata = {
   title: 'Términos de Uso (Colombia) — Eventezer',
@@ -12,8 +8,10 @@ export const metadata: Metadata = {
 };
 
 const EFFECTIVE_DATE = '15 de septiembre de 2026';
-const CONTACT_EMAIL = 'ilemarandrade@gmail.com';
+const CONTACT_EMAIL = 'ilemarsdf@gmail.com';
 const SERVICE_NAME = 'Eventezer';
+const OPERATOR_NAME = 'Ilemar Andrade';
+const OPERATOR_LOCATION = 'Fusagasugá, Colombia';
 
 const TOC: Array<[string, string]> = [
   ['#objeto', '1. Objeto del contrato'],
@@ -48,13 +46,11 @@ export default function TermsOfUseColombiaPage() {
         <h2 className="mb-4 text-xl font-semibold text-foreground">1. Objeto del contrato</h2>
         <p>
           Estos Términos de Uso regulan la relación entre <strong>{SERVICE_NAME}</strong>, operado
-          por <LegalPlaceholder>COMPLETAR: nombre completo</LegalPlaceholder>, identificado con
-          cédula de ciudadanía No. <LegalPlaceholder>COMPLETAR: cédula</LegalPlaceholder>, con
-          domicilio en <LegalPlaceholder>COMPLETAR: dirección</LegalPlaceholder>, Colombia (en
-          adelante, &quot;la Plataforma&quot;), y toda persona natural o jurídica que cree y
-          publique eventos a través de la Plataforma dirigidos al mercado colombiano (en adelante,
-          el &quot;Organizador&quot;). Al registrarse como Organizador y publicar un evento, se
-          acepta expresamente el contenido de este documento.
+          por {OPERATOR_NAME}, con domicilio en {OPERATOR_LOCATION} (en adelante, &quot;la
+          Plataforma&quot;), y toda persona natural o jurídica que cree y publique eventos a través
+          de la Plataforma dirigidos al mercado colombiano (en adelante, el
+          &quot;Organizador&quot;). Al registrarse como Organizador y publicar un evento, se acepta
+          expresamente el contenido de este documento.
         </p>
         <p className="mt-3">
           La Plataforma provee un servicio tecnológico de gestión, venta y validación de entradas.{' '}
@@ -192,13 +188,8 @@ export default function TermsOfUseColombiaPage() {
         <p className="text-muted-foreground">
           Cada parte es responsable del cumplimiento de sus propias obligaciones tributarias
           derivadas de esta relación ante la DIAN (impuesto de renta, IVA, retención en la fuente u
-          otros tributos aplicables).{' '}
-          <LegalPlaceholder>
-            REVISAR CON CONTADOR — retención en la fuente y responsabilidad de IVA aplicables a la
-            comisión de intermediación tecnológica, y régimen tributario del Organizador (persona
-            natural o jurídica)
-          </LegalPlaceholder>
-          .
+          otros tributos aplicables), conforme al régimen tributario que le corresponda al
+          Organizador según su naturaleza (persona natural o jurídica).
         </p>
       </section>
 
@@ -298,8 +289,6 @@ export default function TermsOfUseColombiaPage() {
           naturaleza de mandato mercantil y recaudo por cuenta de terceros descrita en la sección 2.
         </p>
       </section>
-
-      <LegalReviewNotice />
     </LegalPageLayout>
   );
 }

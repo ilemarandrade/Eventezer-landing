@@ -1,9 +1,5 @@
 import type { Metadata } from 'next';
-import {
-  LegalPageLayout,
-  LegalPlaceholder,
-  LegalReviewNotice,
-} from '@/components/legal/legal-page-layout';
+import { LegalPageLayout } from '@/components/legal/legal-page-layout';
 
 export const metadata: Metadata = {
   title: 'Términos de Uso — Eventezer',
@@ -182,12 +178,8 @@ export default function TermsOfUseVenezuelaPage() {
         <p className="text-muted-foreground">
           Cada parte es responsable del cumplimiento de sus propias obligaciones tributarias
           derivadas de esta relación (impuesto sobre la renta, IVA, IGTF u otros tributos
-          aplicables).{' '}
-          <LegalPlaceholder>
-            REVISAR CON CONTADOR — retenciones aplicables en Venezuela sobre comisiones de
-            intermediación y emisión de facturas
-          </LegalPlaceholder>
-          .
+          aplicables), incluyendo la emisión de los comprobantes o facturas que correspondan según
+          la normativa venezolana vigente.
         </p>
       </section>
 
@@ -282,8 +274,6 @@ export default function TermsOfUseVenezuelaPage() {
           naturaleza de mandato y recaudo por cuenta de terceros descrita en la sección 2.
         </p>
       </section>
-
-      <LegalReviewNotice />
     </LegalPageLayout>
   );
 }

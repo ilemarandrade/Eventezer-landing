@@ -1,9 +1,5 @@
 import type { Metadata } from 'next';
-import {
-  LegalPageLayout,
-  LegalPlaceholder,
-  LegalReviewNotice,
-} from '@/components/legal/legal-page-layout';
+import { LegalPageLayout } from '@/components/legal/legal-page-layout';
 
 export const metadata: Metadata = {
   title: 'Aviso de Privacidad — Habeas Data (Colombia) — Eventezer',
@@ -12,8 +8,10 @@ export const metadata: Metadata = {
 };
 
 const EFFECTIVE_DATE = '15 de septiembre de 2026';
-const CONTACT_EMAIL = 'ilemarandrade@gmail.com';
+const CONTACT_EMAIL = 'ilemarsdf@gmail.com';
 const SERVICE_NAME = 'Eventezer';
+const OPERATOR_NAME = 'Ilemar Andrade';
+const OPERATOR_LOCATION = 'Fusagasugá, Colombia';
 
 const TOC: Array<[string, string]> = [
   ['#responsable', '1. Responsable del tratamiento'],
@@ -43,11 +41,8 @@ export default function PrivacyPolicyColombiaPage() {
         </h2>
         <p>
           El responsable del tratamiento de los datos personales recolectados a través de{' '}
-          <strong>{SERVICE_NAME}</strong> para el mercado colombiano es{' '}
-          <LegalPlaceholder>COMPLETAR: nombre completo</LegalPlaceholder>, persona natural
-          identificada con cédula de ciudadanía No.{' '}
-          <LegalPlaceholder>COMPLETAR: cédula</LegalPlaceholder>, con domicilio en{' '}
-          <LegalPlaceholder>COMPLETAR: dirección</LegalPlaceholder>, Colombia, y correo de contacto{' '}
+          <strong>{SERVICE_NAME}</strong> para el mercado colombiano es {OPERATOR_NAME}, persona
+          natural con domicilio en {OPERATOR_LOCATION}, y correo de contacto{' '}
           <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary hover:underline">
             {CONTACT_EMAIL}
           </a>
@@ -222,18 +217,16 @@ export default function PrivacyPolicyColombiaPage() {
         </ul>
         <p className="text-muted-foreground">
           <strong className="text-foreground">Declaración de tratamiento transfronterizo:</strong>{' '}
-          La infraestructura tecnológica de la Plataforma opera sobre servicios de alojamiento en la
-          nube (actualmente Railway), cuyos servidores pueden estar ubicados fuera del territorio
-          colombiano. En consecuencia, los datos personales de titulares en Colombia pueden ser
-          transmitidos y almacenados en el extranjero para efectos de la prestación del servicio.
-          Este tratamiento se realiza bajo los mismos estándares de seguridad y confidencialidad
-          descritos en este Aviso, y solo para las finalidades aquí autorizadas.{' '}
-          <LegalPlaceholder>
-            VERIFICAR — país/región exacta de los servidores del proveedor de alojamiento en la nube
-            utilizado, y si aplica un contrato de transmisión internacional de datos conforme al
-            régimen de la SIC para transferencias fuera de Colombia
-          </LegalPlaceholder>
-          .
+          La infraestructura tecnológica de la Plataforma (API y base de datos) opera sobre
+          servicios de alojamiento en la nube (Railway), cuyos servidores para esta operación se
+          encuentran ubicados en Estados Unidos (región US East, Virginia). En consecuencia, los
+          datos personales de titulares en Colombia son transmitidos y almacenados en el extranjero
+          para efectos de la prestación del servicio. Este tratamiento se realiza bajo los mismos
+          estándares de seguridad y confidencialidad descritos en este Aviso, y solo para las
+          finalidades aquí autorizadas. Esta transferencia internacional se realiza con fundamento
+          en la autorización previa, expresa e informada otorgada por el Titular al momento de la
+          compra (sección 4), la cual cubre expresamente el tratamiento y almacenamiento de sus
+          datos en el extranjero.
         </p>
       </section>
 
@@ -265,14 +258,10 @@ export default function PrivacyPolicyColombiaPage() {
           10. Inscripción en el Registro Nacional de Bases de Datos (RNBD)
         </h2>
         <p className="text-muted-foreground">
-          <LegalPlaceholder>
-            VERIFICAR OBLIGACIÓN DE INSCRIPCIÓN — la Ley 1581 de 2012 y el Decreto 1074 de 2015
-            exigen la inscripción de las bases de datos personales en el RNBD administrado por la
-            Superintendencia de Industria y Comercio (SIC) a los responsables que superen ciertos
-            umbrales de ingresos/activos o que sean entidades públicas. Confirmar con un abogado si
-            esta operación, dada su naturaleza de persona natural, se encuentra obligada a
-            inscribirse, y de ser así, completar dicha inscripción antes de publicar este aviso.
-          </LegalPlaceholder>
+          De conformidad con la Ley 1581 de 2012 y el Decreto 1074 de 2015, la inscripción de esta
+          base de datos en el Registro Nacional de Bases de Datos (RNBD) de la Superintendencia de
+          Industria y Comercio (SIC) se realizará en caso de que la operación supere los umbrales de
+          ingresos o activos que hacen obligatoria dicha inscripción.
         </p>
       </section>
 
@@ -309,8 +298,6 @@ export default function PrivacyPolicyColombiaPage() {
           .
         </p>
       </section>
-
-      <LegalReviewNotice />
     </LegalPageLayout>
   );
 }
