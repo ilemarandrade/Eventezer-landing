@@ -1,7 +1,14 @@
 'use client';
 
 import * as React from 'react';
-import { type Country, DEFAULT_COUNTRY, isSupportedCountry } from '@/lib/country';
+import { usePathname, useRouter } from 'next/navigation';
+import {
+  COUNTRIES,
+  type Country,
+  DEFAULT_COUNTRY,
+  getLegalDocKind,
+  isSupportedCountry,
+} from '@/lib/country';
 import { detectCountryByIp } from '@/lib/geo';
 
 const STORAGE_KEY = 'evz_country';
@@ -18,11 +25,14 @@ interface CountryContextValue {
 const CountryContext = React.createContext<CountryContextValue | undefined>(undefined);
 
 export function CountryProvider({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+  const pathname = usePathname();
   const [country, setCountryState] = React.useState<Country>(DEFAULT_COUNTRY);
   const [isLoading, setIsLoading] = React.useState(true);
   const [needsCountryPrompt, setNeedsCountryPrompt] = React.useState(false);
 
-  const setCountry = React.useCallback((next: Country) => {
+  /** Actualiza el país activo sin navegar (usado por la resolución automática al montar). */
+  const applyCountry = React.useCallback((next: Country) => {
     setCountryState(next);
     setNeedsCountryPrompt(false);
     try {
@@ -31,6 +41,24 @@ export function CountryProvider({ children }: { children: React.ReactNode }) {
       // localStorage no disponible (modo privado, etc.) — se mantiene solo en memoria.
     }
   }, []);
+
+  /**
+   * Elección explícita del usuario (switcher o diálogo). Si está viendo un
+   * documento legal (política de privacidad o términos de uso), lo redirige
+   * de inmediato a la versión del país recién elegido.
+   */
+  const setCountry = React.useCallback(
+    (next: Country) => {
+      applyCountry(next);
+
+      const kind = getLegalDocKind(pathname);
+      if (kind) {
+        const targetPath = COUNTRIES[next].legal[kind === 'privacy' ? 'privacyPath' : 'termsPath'];
+        if (targetPath !== pathname) router.push(targetPath);
+      }
+    },
+    [applyCountry, pathname, router],
+  );
 
   React.useEffect(() => {
     let cancelled = false;
@@ -55,7 +83,7 @@ export function CountryProvider({ children }: { children: React.ReactNode }) {
       if (cancelled) return;
 
       if (detected) {
-        setCountry(detected);
+        applyCountry(detected);
       } else {
         setNeedsCountryPrompt(true);
       }

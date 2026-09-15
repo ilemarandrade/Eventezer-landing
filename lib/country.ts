@@ -52,3 +52,19 @@ export const COUNTRY_LIST: CountryConfig[] = Object.values(COUNTRIES);
 export function isSupportedCountry(value: string | null | undefined): value is Country {
   return !!value && value in COUNTRIES;
 }
+
+export type LegalDocKind = 'privacy' | 'terms';
+
+/**
+ * Si `pathname` es la política de privacidad o los términos de uso de
+ * CUALQUIER país soportado, devuelve de qué documento se trata — así el
+ * switcher puede redirigir a la versión equivalente del país recién
+ * elegido en vez de dejar al usuario viendo el documento del país anterior.
+ */
+export function getLegalDocKind(pathname: string): LegalDocKind | null {
+  for (const c of COUNTRY_LIST) {
+    if (pathname === c.legal.privacyPath) return 'privacy';
+    if (pathname === c.legal.termsPath) return 'terms';
+  }
+  return null;
+}
