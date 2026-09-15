@@ -14,10 +14,10 @@ export function LandingFooter({ className }: { className?: string }) {
   return (
     <footer className={cn('border-t border-border bg-card px-4 py-10', className)}>
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 sm:flex-row">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-center text-sm text-muted-foreground">
           © {new Date().getFullYear()} Eventezer. Todos los derechos reservados.
         </p>
-        <div className="flex gap-6 text-sm">
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm sm:gap-x-6">
           <a
             href={APP_REGISTER_URL}
             className="text-primary hover:underline"
