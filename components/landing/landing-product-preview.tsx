@@ -149,6 +149,7 @@ export function LandingProductPreview() {
                           fill
                           className="object-cover dark:hidden"
                           sizes="220px"
+                          unoptimized
                         />
                         <Image
                           src={current.imageDark ?? current.image}
@@ -156,6 +157,7 @@ export function LandingProductPreview() {
                           fill
                           className="hidden object-cover dark:block"
                           sizes="220px"
+                          unoptimized
                         />
                       </div>
                       {/* home indicator */}
