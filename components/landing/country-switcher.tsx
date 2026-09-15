@@ -39,6 +39,7 @@ export function CountrySwitcher({ className }: { className?: string }) {
         )}
       >
         <span className="text-base leading-none">{active.flag}</span>
+        <span className="text-xs font-semibold sm:hidden">{active.code}</span>
         <span className="hidden sm:inline">{active.name}</span>
         <ChevronDown
           className={cn(
