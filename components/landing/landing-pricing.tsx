@@ -2,7 +2,8 @@
 
 import { useRef, useEffect } from 'react';
 import { useInView } from 'framer-motion';
-import { PLANS } from '@/lib/pricing';
+import { PLANS_BY_COUNTRY, formatPrice } from '@/lib/pricing';
+import { useCountry } from '@/components/providers/country-provider';
 import { ScrollReveal } from '@/components/landing/scroll-reveal';
 import { trackPixelEvent } from '@/lib/pixel';
 import {
@@ -19,6 +20,8 @@ import { BadgeCheck, CheckCircle2 } from 'lucide-react';
 export function LandingPricing() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const { country } = useCountry();
+  const plans = PLANS_BY_COUNTRY[country];
 
   useEffect(() => {
     if (isInView) trackPixelEvent('ViewContent', { content_name: 'pricing' });
@@ -46,7 +49,7 @@ export function LandingPricing() {
             <CardHeader className="pb-2">
               <CardTitle>Comparativa rápida</CardTitle>
               <CardDescription>
-                Montos en USD. Usa la{' '}
+                Montos en {plans[0]!.currency}. Usa la{' '}
                 <a
                   href="#calculadora"
                   className="font-medium text-primary underline underline-offset-4"
@@ -66,7 +69,7 @@ export function LandingPricing() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {PLANS.map((p) => (
+                  {plans.map((p) => (
                     <TableRow key={p.id} className={p.highlight ? 'bg-accent/40' : undefined}>
                       <TableCell className="font-medium">
                         {p.name}
@@ -77,11 +80,9 @@ export function LandingPricing() {
                         ) : null}
                       </TableCell>
                       <TableCell className="text-right tabular-nums">
-                        {p.monthlyUsd === null
+                        {p.monthlyAmount === null
                           ? 'A medida'
-                          : p.monthlyUsd === 0
-                            ? '$0'
-                            : `$${p.monthlyUsd}`}
+                          : formatPrice(p.monthlyAmount, p.currency)}
                       </TableCell>
                       <TableCell className="text-right tabular-nums">{p.commissionPct}%</TableCell>
                     </TableRow>
@@ -93,7 +94,7 @@ export function LandingPricing() {
         </ScrollReveal>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {PLANS.map((p) => (
+          {plans.map((p) => (
             <ScrollReveal key={p.id} delay={0.05}>
               <Card
                 className={`h-full border-border ${p.highlight ? 'ring-2 ring-primary/40' : ''}`}

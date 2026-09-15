@@ -1,9 +1,14 @@
-export type PlanId = "free" | "starter" | "pro";
+import type { Country } from '@/lib/country';
+import { COUNTRIES } from '@/lib/country';
+
+export type PlanId = 'free' | 'starter' | 'pro';
+export type Currency = 'USD' | 'COP';
 
 export interface Plan {
   id: PlanId;
   name: string;
-  monthlyUsd: number | null;
+  monthlyAmount: number | null;
+  currency: Currency;
   commissionPct: number;
   description: string;
   highlight?: boolean;
@@ -14,60 +19,113 @@ export interface Plan {
   onlineDelivery: boolean;
 }
 
-export const PLANS: Plan[] = [
-  {
-    id: "free",
-    name: "Free",
-    monthlyUsd: 0,
-    commissionPct: 10,
-    description: "Valida tu operación sin costo fijo.",
-    simultaneousEvents: 1,
-    staff: 1,
-    analytics: "Resumen: evento activo + 2 recientes",
-    waitlist: false,
-    onlineDelivery: true,
-  },
-  {
-    id: "starter",
-    name: "Starter",
-    monthlyUsd: 20,
-    commissionPct: 8,
-    description: "Escala tu operación con mejor margen.",
-    simultaneousEvents: 5,
-    staff: 3,
-    analytics: "Ventas y check-ins: activo + 3 recientes",
-    waitlist: false,
-    onlineDelivery: true,
-  },
-  {
-    id: "pro",
-    name: "Pro",
-    monthlyUsd: 40,
-    commissionPct: 5,
-    description: "Operación y analítica completas, sin límites.",
-    highlight: true,
-    simultaneousEvents: "Ilimitados",
-    staff: "Ilimitados",
-    analytics: "Full analytics + overview global + stream en vivo",
-    waitlist: true,
-    onlineDelivery: true,
-  },
-];
+export const PLANS_BY_COUNTRY: Record<Country, Plan[]> = {
+  VE: [
+    {
+      id: 'free',
+      name: 'Free',
+      monthlyAmount: 0,
+      currency: 'USD',
+      commissionPct: 10,
+      description: 'Valida tu operación sin costo fijo.',
+      simultaneousEvents: 1,
+      staff: 1,
+      analytics: 'Resumen: evento activo + 2 recientes',
+      waitlist: false,
+      onlineDelivery: true,
+    },
+    {
+      id: 'starter',
+      name: 'Starter',
+      monthlyAmount: 20,
+      currency: 'USD',
+      commissionPct: 8,
+      description: 'Escala tu operación con mejor margen.',
+      simultaneousEvents: 5,
+      staff: 3,
+      analytics: 'Ventas y check-ins: activo + 3 recientes',
+      waitlist: false,
+      onlineDelivery: true,
+    },
+    {
+      id: 'pro',
+      name: 'Pro',
+      monthlyAmount: 40,
+      currency: 'USD',
+      commissionPct: 5,
+      description: 'Operación y analítica completas, sin límites.',
+      highlight: true,
+      simultaneousEvents: 'Ilimitados',
+      staff: 'Ilimitados',
+      analytics: 'Full analytics + overview global + stream en vivo',
+      waitlist: true,
+      onlineDelivery: true,
+    },
+  ],
+  CO: [
+    {
+      id: 'free',
+      name: 'Free',
+      monthlyAmount: 0,
+      currency: 'COP',
+      commissionPct: 10,
+      description: 'Valida tu operación sin costo fijo.',
+      simultaneousEvents: 1,
+      staff: 1,
+      analytics: 'Resumen: evento activo + 2 recientes',
+      waitlist: false,
+      onlineDelivery: true,
+    },
+    {
+      id: 'starter',
+      name: 'Starter',
+      monthlyAmount: 62000,
+      currency: 'COP',
+      commissionPct: 8,
+      description: 'Escala tu operación con mejor margen.',
+      simultaneousEvents: 5,
+      staff: 3,
+      analytics: 'Ventas y check-ins: activo + 3 recientes',
+      waitlist: false,
+      onlineDelivery: true,
+    },
+    {
+      id: 'pro',
+      name: 'Pro',
+      monthlyAmount: 125000,
+      currency: 'COP',
+      commissionPct: 5,
+      description: 'Operación y analítica completas, sin límites.',
+      highlight: true,
+      simultaneousEvents: 'Ilimitados',
+      staff: 'Ilimitados',
+      analytics: 'Full analytics + overview global + stream en vivo',
+      waitlist: true,
+      onlineDelivery: true,
+    },
+  ],
+};
 
-export function monthlyCostForPlan(
-  plan: Plan,
-  monthlyGrossSalesUsd: number,
-): number {
-  const fee = plan.monthlyUsd ?? 0;
-  return fee + monthlyGrossSalesUsd * (plan.commissionPct / 100);
+/** Formatea un monto en la moneda indicada usando el locale del país correspondiente. */
+export function formatPrice(amount: number, currency: Currency): string {
+  const locale = Object.values(COUNTRIES).find((c) => c.currency === currency)?.locale ?? 'es-ES';
+  return amount.toLocaleString(locale, {
+    style: 'currency',
+    currency,
+    maximumFractionDigits: 0,
+  });
 }
 
-export function bestPlanForRevenue(monthlyGrossSalesUsd: number): Plan {
-  const candidates = PLANS;
-  let best = candidates[0]!;
-  let bestCost = monthlyCostForPlan(best, monthlyGrossSalesUsd);
-  for (const p of candidates.slice(1)) {
-    const c = monthlyCostForPlan(p, monthlyGrossSalesUsd);
+export function monthlyCostForPlan(plan: Plan, monthlyGrossSales: number): number {
+  const fee = plan.monthlyAmount ?? 0;
+  return fee + monthlyGrossSales * (plan.commissionPct / 100);
+}
+
+export function bestPlanForRevenue(plans: Plan[], monthlyGrossSales: number): Plan {
+  let best = plans[0]!;
+  let bestCost = monthlyCostForPlan(best, monthlyGrossSales);
+  for (const p of plans.slice(1)) {
+    const c = monthlyCostForPlan(p, monthlyGrossSales);
     if (c < bestCost) {
       bestCost = c;
       best = p;
@@ -76,13 +134,7 @@ export function bestPlanForRevenue(monthlyGrossSalesUsd: number): Plan {
   return best;
 }
 
-export function savingsVsFree(
-  plan: Plan,
-  monthlyGrossSalesUsd: number,
-): number {
-  const flex = PLANS.find((p) => p.id === "free")!;
-  return (
-    monthlyCostForPlan(flex, monthlyGrossSalesUsd) -
-    monthlyCostForPlan(plan, monthlyGrossSalesUsd)
-  );
+export function savingsVsFree(plans: Plan[], plan: Plan, monthlyGrossSales: number): number {
+  const free = plans.find((p) => p.id === 'free')!;
+  return monthlyCostForPlan(free, monthlyGrossSales) - monthlyCostForPlan(plan, monthlyGrossSales);
 }
