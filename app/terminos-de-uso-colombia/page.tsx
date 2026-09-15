@@ -39,7 +39,7 @@ const TOC: Array<[string, string]> = [
 export default function TermsOfUseColombiaPage() {
   return (
     <LegalPageLayout
-      title="Términos de Uso — Contrato de Mandato (Colombia)"
+      title="Términos de Uso — Contrato de Mandato"
       serviceLabel={`${SERVICE_NAME} (Colombia)`}
       effectiveDate={EFFECTIVE_DATE}
       toc={TOC}
