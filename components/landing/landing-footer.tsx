@@ -9,7 +9,7 @@ import { COUNTRIES } from '@/lib/country';
 
 export function LandingFooter({ className }: { className?: string }) {
   const { country } = useCountry();
-  const legal = COUNTRIES[country].legal;
+  const { legal, signupEnabled } = COUNTRIES[country];
 
   return (
     <footer className={cn('border-t border-border bg-card px-4 py-10', className)}>
@@ -18,16 +18,24 @@ export function LandingFooter({ className }: { className?: string }) {
           © {new Date().getFullYear()} Eventezer. Todos los derechos reservados.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm sm:gap-x-6">
-          <a
-            href={APP_REGISTER_URL}
-            className="text-primary hover:underline"
-            onClick={() => trackPixelEvent('InitiateCheckout')}
-          >
-            Registro
-          </a>
-          <a href={APP_LOGIN_URL} className="text-muted-foreground hover:text-foreground">
-            Login
-          </a>
+          {signupEnabled ? (
+            <>
+              <a
+                href={APP_REGISTER_URL}
+                className="text-primary hover:underline"
+                onClick={() => trackPixelEvent('InitiateCheckout')}
+              >
+                Registro
+              </a>
+              <a href={APP_LOGIN_URL} className="text-muted-foreground hover:text-foreground">
+                Login
+              </a>
+            </>
+          ) : (
+            <Link href="/#contacto" className="text-primary hover:underline">
+              Contacto
+            </Link>
+          )}
           <Link href="/#faq" className="text-muted-foreground hover:text-foreground">
             FAQ
           </Link>
