@@ -8,6 +8,7 @@ import { ScrollReveal } from '@/components/landing/scroll-reveal';
 import { NumberTicker } from '@/components/landing/number-ticker';
 import {
   PLANS_BY_COUNTRY,
+  PLATFORM_VAT_PCT,
   bestPlanForRevenue,
   monthlyCostForPlan,
   formatPrice,
@@ -44,16 +45,20 @@ export function LandingCalculator() {
 
   const monthlyTickets = eventsPerMonth * ticketsPerEvent;
   const monthlyGross = monthlyTickets * avgPrice;
-  const recommended = useMemo(() => bestPlanForRevenue(plans, monthlyGross), [plans, monthlyGross]);
+  const volume = useMemo(
+    () => ({ tickets: monthlyTickets, avgPrice, vatPct: PLATFORM_VAT_PCT[country] }),
+    [monthlyTickets, avgPrice, country],
+  );
+  const recommended = useMemo(() => bestPlanForRevenue(plans, volume), [plans, volume]);
   const planComparisons = useMemo(
     () =>
       plans.map((plan) => ({
         ...plan,
         monthlyFee: plan.monthlyAmount ?? 0,
         commissionCost: monthlyGross * (plan.commissionPct / 100),
-        estimatedCost: monthlyCostForPlan(plan, monthlyGross),
+        estimatedCost: monthlyCostForPlan(plan, volume),
       })),
-    [plans, monthlyGross],
+    [plans, monthlyGross, volume],
   );
   const recommendedComparison = planComparisons.find((p) => p.id === recommended.id)!;
   const recommendedNet = monthlyGross - recommendedComparison.estimatedCost;
