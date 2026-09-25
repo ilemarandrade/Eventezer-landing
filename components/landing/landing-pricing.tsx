@@ -2,7 +2,14 @@
 
 import { useRef, useEffect } from 'react';
 import { useInView } from 'framer-motion';
-import { PLANS_BY_COUNTRY, formatPrice } from '@/lib/pricing';
+import {
+  EXAMPLE_TICKET_PRICE,
+  PLANS_BY_COUNTRY,
+  PLATFORM_VAT_PCT,
+  formatCommission,
+  formatPrice,
+  platformFeePerTicket,
+} from '@/lib/pricing';
 import { useCountry } from '@/components/providers/country-provider';
 import { ScrollReveal } from '@/components/landing/scroll-reveal';
 import { trackPixelEvent } from '@/lib/pixel';
@@ -15,7 +22,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { BadgeCheck, CheckCircle2 } from 'lucide-react';
+import { BadgeCheck, CheckCircle2, Ticket } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 function PlanFeature({ label, value }: { label: string; value: string | number }) {
@@ -33,6 +40,8 @@ export function LandingPricing() {
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
   const { country } = useCountry();
   const plans = PLANS_BY_COUNTRY[country];
+  const vatPct = PLATFORM_VAT_PCT[country];
+  const hasFixedFee = plans.some((p) => p.fixedFeePerTicket > 0);
 
   useEffect(() => {
     if (isInView) trackPixelEvent('ViewContent', { content_name: 'pricing' });
@@ -50,8 +59,12 @@ export function LandingPricing() {
             Planes para cada etapa de crecimiento
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-muted-foreground">
-            Empieza en Free y reduce comisión a medida que escalas. La comisión se aplica solo
-            cuando la orden está en estado <strong className="text-foreground">APROBADO</strong>.
+            Empieza en Free y reduce comisión a medida que escalas.{' '}
+            {hasFixedFee
+              ? 'Cada plan cobra un porcentaje del precio más un cargo fijo por boleta vendida, sin costos ocultos. '
+              : null}
+            La comisión se aplica solo cuando la orden está en estado{' '}
+            <strong className="text-foreground">APROBADO</strong>.
           </p>
         </ScrollReveal>
 
@@ -90,11 +103,30 @@ export function LandingPricing() {
                     </div>
                     <div className="text-right">
                       <p className="text-lg font-semibold leading-none tabular-nums text-primary">
-                        {p.commissionPct}%
+                        {formatCommission(p)}
                       </p>
-                      <p className="mt-1 text-xs text-muted-foreground">comisión/entrada</p>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {p.fixedFeePerTicket > 0 ? 'por boleta vendida' : 'comisión/entrada'}
+                      </p>
                     </div>
                   </div>
+
+                  {p.fixedFeePerTicket > 0 ? (
+                    <p className="flex items-start gap-2 text-xs text-muted-foreground">
+                      <Ticket className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+                      <span>
+                        En una boleta de {formatPrice(EXAMPLE_TICKET_PRICE, p.currency)}, Eventezer
+                        cobra{' '}
+                        <strong className="tabular-nums text-foreground">
+                          {formatPrice(
+                            platformFeePerTicket(p, EXAMPLE_TICKET_PRICE, vatPct),
+                            p.currency,
+                          )}
+                        </strong>
+                        {vatPct > 0 ? ` (IVA ${vatPct}% incluido)` : null}.
+                      </span>
+                    </p>
+                  ) : null}
 
                   {/* Beneficios en columna, fáciles de escanear */}
                   <div className="flex flex-col gap-2.5">
@@ -135,7 +167,9 @@ export function LandingPricing() {
                   <TableRow>
                     <TableHead>Plan</TableHead>
                     <TableHead className="text-right">Mensual</TableHead>
-                    <TableHead className="text-right">Comisión / entrada</TableHead>
+                    <TableHead className="text-right">
+                      {hasFixedFee ? 'Comisión por boleta' : 'Comisión / entrada'}
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -154,7 +188,9 @@ export function LandingPricing() {
                           ? 'A medida'
                           : formatPrice(p.monthlyAmount, p.currency)}
                       </TableCell>
-                      <TableCell className="text-right tabular-nums">{p.commissionPct}%</TableCell>
+                      <TableCell className="text-right tabular-nums">
+                        {formatCommission(p)}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
