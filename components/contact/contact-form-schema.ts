@@ -22,6 +22,10 @@ export const contactFormSchema = z.object({
       message: 'Selecciona un tipo de organización',
     }),
   message: z.string().min(10, 'Cuéntanos un poco más'),
+  /** Autorización previa, expresa e informada para el tratamiento de datos (Ley 1581 de 2012). */
+  dataConsent: z.boolean().refine((v) => v, {
+    message: 'Debes autorizar el tratamiento de tus datos para enviar el formulario',
+  }),
 });
 
 export type ContactFormValues = z.infer<typeof contactFormSchema>;
