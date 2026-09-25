@@ -7,6 +7,11 @@ export interface CountryConfig {
   currency: 'USD' | 'COP';
   /** Locale usado con Intl.NumberFormat/toLocaleString para esta moneda. */
   locale: string;
+  /**
+   * Si el flujo de registro/login de la app está disponible en este país. Si es
+   * false, la landing oculta esos accesos y dirige al formulario de contacto.
+   */
+  signupEnabled: boolean;
   /** Rutas de los documentos legales vigentes para este país. */
   legal: {
     privacyPath: string;
@@ -27,6 +32,7 @@ export const COUNTRIES: Record<Country, CountryConfig> = {
     flag: '🇻🇪',
     currency: 'USD',
     locale: 'es-VE',
+    signupEnabled: true,
     legal: {
       privacyPath: '/politica-de-privacidad',
       termsPath: '/terminos-de-uso',
@@ -38,6 +44,7 @@ export const COUNTRIES: Record<Country, CountryConfig> = {
     flag: '🇨🇴',
     currency: 'COP',
     locale: 'es-CO',
+    signupEnabled: false,
     legal: {
       privacyPath: '/politica-de-privacidad-colombia',
       termsPath: '/terminos-de-uso-colombia',

@@ -21,10 +21,27 @@ const faqs: FaqItem[] = [
   {
     q: '¿Cómo sé qué plan me conviene?',
     a: 'Usa la sección Calculadora con tus eventos por mes, tickets por evento y precio promedio. Te sugerimos el plan con menor costo total estimado (suscripción + comisión).',
+    countries: ['VE'],
+  },
+  {
+    q: '¿Cómo sé qué plan me conviene?',
+    a: 'Usa la sección Calculadora con tus eventos por mes, boletas por evento y precio promedio. Te sugerimos el plan con menor costo total estimado: suscripción + comisión (porcentaje del precio + $500 por boleta vendida).',
+    countries: ['CO'],
   },
   {
     q: '¿Cuándo se aplica la comisión por entrada?',
     a: 'Solo sobre órdenes en estado APROBADO. Reservas, pendientes de pago o canceladas no generan comisión.',
+    countries: ['VE'],
+  },
+  {
+    q: '¿Cuánto cobra Eventezer por boleta y cuándo?',
+    a: 'Por cada boleta vendida cobramos un porcentaje del precio según tu plan (Free 9%, Starter 6%, Pro 4%) más un cargo fijo de $500. Solo se aplica sobre órdenes en estado APROBADO; reservas, pendientes de pago o canceladas no generan comisión.',
+    countries: ['CO'],
+  },
+  {
+    q: '¿Quién paga la pasarela de pago?',
+    a: 'Los pagos se procesan con Wompi, que cobra 2,65% + $700 + IVA (19%) por transacción. Ese valor lo paga el comprador al momento de la compra y va directo a Wompi: Eventezer no recibe nada de él. Como una transacción puede incluir varias boletas, el costo por boleta varía según cuántas se compren juntas.',
+    countries: ['CO'],
   },
   {
     q: '¿Puedo cambiar de plan en cualquier momento?',

@@ -9,6 +9,8 @@ import { ScrollReveal } from '@/components/landing/scroll-reveal';
 import { APP_REGISTER_URL, DEMO_URL } from '@/lib/constants';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { trackPixelEvent, trackCustomPixelEvent } from '@/lib/pixel';
+import { useCountry } from '@/components/providers/country-provider';
+import { COUNTRIES } from '@/lib/country';
 
 export function LandingHero() {
   const ref = useRef<HTMLElement>(null);
@@ -17,6 +19,8 @@ export function LandingHero() {
     offset: ['start start', 'end start'],
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const { country } = useCountry();
+  const { signupEnabled } = COUNTRIES[country];
 
   return (
     <section
@@ -72,10 +76,17 @@ export function LandingHero() {
         >
           <MagneticButton>
             <Button size="lg" className="rounded-full px-8" asChild>
-              <a href={APP_REGISTER_URL} onClick={() => trackPixelEvent('InitiateCheckout')}>
-                Crear mi evento gratis
-                <ArrowRight className="h-4 w-4" />
-              </a>
+              {signupEnabled ? (
+                <a href={APP_REGISTER_URL} onClick={() => trackPixelEvent('InitiateCheckout')}>
+                  Crear mi evento gratis
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              ) : (
+                <a href="#contacto" onClick={() => trackPixelEvent('Contact')}>
+                  Quiero usar Eventezer
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              )}
             </Button>
           </MagneticButton>
           <Button size="lg" variant="outline" className="rounded-full px-8" asChild>

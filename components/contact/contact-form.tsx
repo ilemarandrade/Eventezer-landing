@@ -16,10 +16,21 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { CustomSelect } from '@/components/ui/select';
+import { useCountry } from '@/components/providers/country-provider';
+import { COUNTRIES } from '@/lib/country';
+
+const EMPTY_VALUES: Omit<ContactFormValues, 'message'> = {
+  name: '',
+  email: '',
+  organizationType: '',
+  dataConsent: false,
+};
 
 export function ContactForm({ defaultMessage = '' }: { defaultMessage?: string }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const hasFiredContact = useRef(false);
+  const { country } = useCountry();
+  const { privacyPath } = COUNTRIES[country].legal;
 
   const {
     control,
@@ -29,7 +40,7 @@ export function ContactForm({ defaultMessage = '' }: { defaultMessage?: string }
     formState: { errors },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
-    defaultValues: { name: '', email: '', organizationType: '', message: defaultMessage },
+    defaultValues: { ...EMPTY_VALUES, message: defaultMessage },
     mode: 'onTouched',
   });
 
@@ -43,7 +54,13 @@ export function ContactForm({ defaultMessage = '' }: { defaultMessage?: string }
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/lead-inquiries`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        // El consentimiento se valida en el cliente; el backend aún no recibe este campo.
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          organizationType: data.organizationType,
+          message: data.message,
+        }),
       });
 
       if (!res.ok) {
@@ -53,7 +70,7 @@ export function ContactForm({ defaultMessage = '' }: { defaultMessage?: string }
 
       trackPixelEvent('Lead');
       toast.success('Gracias. Nuestro equipo revisará tu mensaje y te contactará pronto.');
-      reset({ name: '', email: '', organizationType: '', message: '' });
+      reset({ ...EMPTY_VALUES, message: '' });
     } catch {
       toast.error('No pudimos enviar tu mensaje. Intenta de nuevo más tarde.');
     } finally {
@@ -159,6 +176,48 @@ export function ContactForm({ defaultMessage = '' }: { defaultMessage?: string }
             />
             {errors.message?.message && (
               <p className="text-xs text-destructive">{errors.message.message}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Controller
+              name="dataConsent"
+              control={control}
+              render={({ field }) => (
+                <label htmlFor="dataConsent" className="flex items-start gap-2.5 text-sm">
+                  <input
+                    id="dataConsent"
+                    type="checkbox"
+                    ref={field.ref}
+                    name={field.name}
+                    checked={field.value}
+                    onChange={(e) => field.onChange(e.target.checked)}
+                    onBlur={field.onBlur}
+                    disabled={isSubmitting}
+                    aria-invalid={Boolean(errors.dataConsent)}
+                    aria-describedby={errors.dataConsent ? 'dataConsent-error' : undefined}
+                    className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-primary"
+                  />
+                  <span className="text-muted-foreground">
+                    Autorizo a Eventezer a tratar mis datos personales para responder a mi solicitud
+                    y contactarme sobre el servicio, conforme a la{' '}
+                    <a
+                      href={privacyPath}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-primary underline underline-offset-4"
+                    >
+                      Política de Privacidad
+                    </a>
+                    .
+                  </span>
+                </label>
+              )}
+            />
+            {errors.dataConsent?.message && (
+              <p id="dataConsent-error" className="text-xs text-destructive">
+                {errors.dataConsent.message}
+              </p>
             )}
           </div>
 

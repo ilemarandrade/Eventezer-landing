@@ -76,6 +76,10 @@ export default function PrivacyPolicyColombiaPage() {
           </li>
           <li>Método de pago elegido y referencia de pago reportada</li>
           <li>Datos técnicos: tokens de sesión y códigos QR de validación de entrada</li>
+          <li>
+            Datos del formulario de contacto: nombre, correo electrónico, tipo de organizador y el
+            mensaje que nos envías
+          </li>
         </ul>
         <p className="mt-3 text-muted-foreground">
           No procesamos ni almacenamos los números completos de tarjetas de crédito o débito; esa
@@ -101,6 +105,11 @@ export default function PrivacyPolicyColombiaPage() {
             Gestionar el ciclo de vida del pago y emitir reportes de facturación al Organizador.
           </li>
           <li>Atender solicitudes, quejas y reclamos relacionados con la compra.</li>
+          <li>
+            Responder las solicitudes recibidas por el formulario de contacto y contactar a los
+            organizadores interesados en usar {SERVICE_NAME} para presentarles el servicio y
+            preparar su espacio de trabajo.
+          </li>
         </ol>
       </section>
 
@@ -112,6 +121,11 @@ export default function PrivacyPolicyColombiaPage() {
           personales conforme a las finalidades descritas en este Aviso, incluyendo su entrega al
           Organizador del evento para fines logísticos. Esta autorización se recaba mediante la
           aceptación explícita (casilla de verificación) en el formulario de compra.
+        </p>
+        <p className="mt-3 text-muted-foreground">
+          De igual forma, quien nos escribe a través del formulario de contacto otorga su
+          autorización marcando la casilla de verificación correspondiente, que es obligatoria para
+          enviar el formulario. Sin esta autorización no recibimos ni tratamos sus datos.
         </p>
       </section>
 

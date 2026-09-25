@@ -10,6 +10,8 @@ import { Menu, Moon, Sun, X } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { APP_LOGIN_URL, APP_REGISTER_URL } from '@/lib/constants';
 import { trackPixelEvent } from '@/lib/pixel';
+import { useCountry } from '@/components/providers/country-provider';
+import { COUNTRIES } from '@/lib/country';
 
 const links = [
   { href: '/#caracteristicas', label: 'Características' },
@@ -39,6 +41,8 @@ function ThemeToggleButton() {
 export function LandingNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const closeMobile = () => setMobileOpen(false);
+  const { country } = useCountry();
+  const { signupEnabled } = COUNTRIES[country];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background">
@@ -57,14 +61,24 @@ export function LandingNavbar() {
         <div className="hidden items-center gap-3 md:flex">
           <CountrySwitcher />
           <ThemeToggleButton />
-          <Button variant="outline" size="sm" asChild>
-            <a href={APP_LOGIN_URL}>Login</a>
-          </Button>
-          <Button size="sm" asChild>
-            <a href={APP_REGISTER_URL} onClick={() => trackPixelEvent('InitiateCheckout')}>
-              Registrarme
-            </a>
-          </Button>
+          {signupEnabled ? (
+            <>
+              <Button variant="outline" size="sm" asChild>
+                <a href={APP_LOGIN_URL}>Login</a>
+              </Button>
+              <Button size="sm" asChild>
+                <a href={APP_REGISTER_URL} onClick={() => trackPixelEvent('InitiateCheckout')}>
+                  Registrarme
+                </a>
+              </Button>
+            </>
+          ) : (
+            <Button size="sm" asChild>
+              <Link href="/#contacto" onClick={() => trackPixelEvent('Contact')}>
+                Escríbenos
+              </Link>
+            </Button>
+          )}
         </div>
 
         {/* Mobile: indicador de país (con iniciales) + botón de menú hamburguesa */}
@@ -112,18 +126,32 @@ export function LandingNavbar() {
             </div>
 
             <div className="flex flex-col gap-2 border-t border-border px-4 py-4">
-              <Button variant="outline" asChild onClick={closeMobile}>
-                <a href={APP_LOGIN_URL}>Login</a>
-              </Button>
-              <Button
-                asChild
-                onClick={() => {
-                  trackPixelEvent('InitiateCheckout');
-                  closeMobile();
-                }}
-              >
-                <a href={APP_REGISTER_URL}>Registrarme</a>
-              </Button>
+              {signupEnabled ? (
+                <>
+                  <Button variant="outline" asChild onClick={closeMobile}>
+                    <a href={APP_LOGIN_URL}>Login</a>
+                  </Button>
+                  <Button
+                    asChild
+                    onClick={() => {
+                      trackPixelEvent('InitiateCheckout');
+                      closeMobile();
+                    }}
+                  >
+                    <a href={APP_REGISTER_URL}>Registrarme</a>
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  asChild
+                  onClick={() => {
+                    trackPixelEvent('Contact');
+                    closeMobile();
+                  }}
+                >
+                  <Link href="/#contacto">Escríbenos</Link>
+                </Button>
+              )}
             </div>
           </motion.div>
         )}

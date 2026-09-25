@@ -9,6 +9,7 @@ import { LandingPersonas } from '@/components/landing/landing-personas';
 import { LandingProductPreview } from '@/components/landing/landing-product-preview';
 import { LandingPricing } from '@/components/landing/landing-pricing';
 import { LandingCalculator } from '@/components/landing/landing-calculator';
+import { LandingPaymentBreakdown } from '@/components/landing/landing-payment-breakdown';
 import { LandingFaq } from '@/components/landing/landing-faq';
 import { LandingServiceCta } from '@/components/landing/landing-service-cta';
 import { LandingContact } from '@/components/landing/landing-contact';
@@ -33,6 +34,7 @@ export default function HomePage() {
               <LandingProductPreview />
               <LandingPricing />
               <LandingCalculator />
+              <LandingPaymentBreakdown />
               <LandingServiceCta />
               <LandingFaq />
               <LandingContact />
