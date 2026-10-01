@@ -4,6 +4,7 @@ import { LandingEspiralDecor } from '@/components/landing/landing-espiral-decor'
 import { LandingConoDecor } from '@/components/landing/landing-cono-decor';
 import { LandingCilindroDecor } from '@/components/landing/landing-cilindro-decor';
 import { LandingHero } from '@/components/landing/landing-hero';
+import { LandingDashboardPreview } from '@/components/landing/landing-dashboard-preview';
 import { LandingGrowthStructure } from '@/components/landing/landing-growth-structure';
 import { LandingPersonas } from '@/components/landing/landing-personas';
 import { LandingProductPreview } from '@/components/landing/landing-product-preview';
@@ -18,7 +19,7 @@ import { LandingFooter } from '@/components/landing/landing-footer';
 export default function HomePage() {
   return (
     <>
-      <LandingNavbar />
+      <LandingNavbar overHero />
       <div className="relative">
         <LandingAroDecor />
         <LandingCilindroDecor />
@@ -26,6 +27,7 @@ export default function HomePage() {
         <LandingConoDecor side="left" />
         <main className="relative z-10">
           <LandingHero />
+          <LandingDashboardPreview />
           <div className="relative">
             <LandingEspiralDecor />
             <div className="relative z-10">
