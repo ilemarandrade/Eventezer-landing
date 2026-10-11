@@ -12,9 +12,7 @@ import { trackPixelEvent, trackCustomPixelEvent } from '@/lib/pixel';
 import { useCountry } from '@/components/providers/country-provider';
 import { COUNTRIES } from '@/lib/country';
 
-// Video de ejemplo (Mixkit, licencia gratuita): reemplazar por el video propio de Eventezer.
-const HERO_VIDEO_SRC = 'https://assets.mixkit.co/videos/4185/4185-720.mp4';
-const HERO_VIDEO_POSTER = 'https://assets.mixkit.co/videos/4185/4185-thumb-720-0.jpg';
+const HERO_VIDEO_SRC = '/videos/hero-video.mp4';
 
 export function LandingHero() {
   const ref = useRef<HTMLElement>(null);
@@ -49,7 +47,7 @@ export function LandingHero() {
         style={{ y: videoY }}
         className="absolute inset-0 scale-110 will-change-transform"
       >
-        <BackgroundVideo src={HERO_VIDEO_SRC} poster={HERO_VIDEO_POSTER} />
+        <BackgroundVideo src={HERO_VIDEO_SRC} />
       </motion.div>
       <div className="pointer-events-none absolute inset-0 bg-black/55" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,var(--primary),transparent)] opacity-30" />
