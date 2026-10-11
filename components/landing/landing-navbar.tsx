@@ -58,7 +58,7 @@ export function LandingNavbar({ overHero = false }: { overHero?: boolean }) {
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 w-full border-b transition-colors duration-300',
+        'sticky top-0 z-50 w-full transition-colors duration-300',
         // `dark` fuerza texto claro mientras está sobre el video.
         transparent ? 'dark border-transparent bg-transparent' : 'border-border bg-background',
       )}
