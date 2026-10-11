@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { LandingNavbar } from "@/components/landing/landing-navbar";
-import { LandingFooter } from "@/components/landing/landing-footer";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { LandingNavbar } from '@/components/landing/landing-navbar';
+import { LandingFooter } from '@/components/landing/landing-footer';
 
 export const metadata: Metadata = {
-  title: "Política de Privacidad — Eventezer",
+  title: 'Política de Privacidad — Eventezer',
   description:
-    "Política de privacidad de Eventezer: cómo recopilamos, usamos y protegemos tus datos personales.",
+    'Política de privacidad de Eventezer: cómo recopilamos, usamos y protegemos tus datos personales.',
 };
 
-const EFFECTIVE_DATE = "15 de abril de 2025";
-const CONTACT_EMAIL = "ilemarandrade@gmail.com";
-const SERVICE_NAME = "Eventezer";
+const EFFECTIVE_DATE = '15 de abril de 2025';
+const CONTACT_EMAIL = 'ilemarandrade@gmail.com';
+const SERVICE_NAME = 'Eventezer';
 
 export default function PrivacyPolicyPage() {
   return (
@@ -24,8 +24,10 @@ export default function PrivacyPolicyPage() {
             Política de Privacidad
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            Servicio: <span className="font-medium text-foreground">{SERVICE_NAME}</span>
-            {" · "}Vigente desde: <span className="font-medium text-foreground">{EFFECTIVE_DATE}</span>
+            Servicio:{' '}
+            <span className="font-medium text-foreground">{SERVICE_NAME} (Venezuela)</span>
+            {' · '}Vigente desde:{' '}
+            <span className="font-medium text-foreground">{EFFECTIVE_DATE}</span>
           </p>
         </div>
 
@@ -39,23 +41,20 @@ export default function PrivacyPolicyPage() {
           </h2>
           <ol className="space-y-1.5 text-sm">
             {[
-              ["#quienes-somos", "1. Quiénes somos"],
-              ["#datos-que-recopilamos", "2. Datos que recopilamos"],
-              ["#finalidad-del-tratamiento", "3. Finalidad del tratamiento"],
-              ["#terceros", "4. Terceros que reciben datos"],
-              ["#cookies-publicidad", "5. Cookies y publicidad (Google AdSense)"],
-              ["#retencion-datos", "6. Retención y eliminación de datos"],
-              ["#seguridad", "7. Seguridad de la información"],
-              ["#derechos-usuario", "8. Derechos del usuario"],
-              ["#menores-edad", "9. Menores de edad"],
-              ["#cambios-politica", "10. Cambios en esta política"],
-              ["#contacto", "11. Contacto"],
+              ['#quienes-somos', '1. Quiénes somos'],
+              ['#datos-que-recopilamos', '2. Datos que recopilamos'],
+              ['#finalidad-del-tratamiento', '3. Finalidad del tratamiento'],
+              ['#terceros', '4. Terceros que reciben datos'],
+              ['#cookies-publicidad', '5. Cookies y publicidad (Google AdSense)'],
+              ['#retencion-datos', '6. Retención y eliminación de datos'],
+              ['#seguridad', '7. Seguridad de la información'],
+              ['#derechos-usuario', '8. Derechos del usuario'],
+              ['#menores-edad', '9. Menores de edad'],
+              ['#cambios-politica', '10. Cambios en esta política'],
+              ['#contacto', '11. Contacto'],
             ].map(([href, label]) => (
               <li key={href}>
-                <a
-                  href={href}
-                  className="text-primary hover:underline"
-                >
+                <a href={href} className="text-primary hover:underline">
                   {label}
                 </a>
               </li>
@@ -66,9 +65,7 @@ export default function PrivacyPolicyPage() {
         <div className="space-y-12 text-sm leading-7 text-foreground">
           {/* 1 */}
           <section id="quienes-somos">
-            <h2 className="mb-4 text-xl font-semibold text-foreground">
-              1. Quiénes somos
-            </h2>
+            <h2 className="mb-4 text-xl font-semibold text-foreground">1. Quiénes somos</h2>
             <p>
               <strong>{SERVICE_NAME}</strong> es una plataforma en línea para la gestión, venta y
               validación de entradas para eventos, operada desde Venezuela. A través de esta
@@ -76,7 +73,7 @@ export default function PrivacyPolicyPage() {
               compradores pueden adquirir entradas de forma segura.
             </p>
             <p className="mt-3">
-              Para cualquier consulta relacionada con esta política, puedes contactarnos en{" "}
+              Para cualquier consulta relacionada con esta política, puedes contactarnos en{' '}
               <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary hover:underline">
                 {CONTACT_EMAIL}
               </a>
@@ -86,9 +83,7 @@ export default function PrivacyPolicyPage() {
 
           {/* 2 */}
           <section id="datos-que-recopilamos">
-            <h2 className="mb-4 text-xl font-semibold text-foreground">
-              2. Datos que recopilamos
-            </h2>
+            <h2 className="mb-4 text-xl font-semibold text-foreground">2. Datos que recopilamos</h2>
             <p className="mb-4">
               Recopilamos distintas categorías de datos según el rol que desempeñas en nuestra
               plataforma:
@@ -103,9 +98,7 @@ export default function PrivacyPolicyPage() {
                   <li>Nombre y apellido</li>
                   <li>Correo electrónico</li>
                   <li>Número de teléfono (opcional)</li>
-                  <li>
-                    Documento de identidad: cédula, RIF o pasaporte (opcional)
-                  </li>
+                  <li>Documento de identidad: cédula, RIF o pasaporte (opcional)</li>
                   <li>
                     Datos de titulares de entradas: nombre, apellido y correo electrónico por cada
                     entrada dentro de una orden
@@ -114,17 +107,15 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h3 className="mb-2 font-semibold text-foreground">
-                  B) Datos de pago
-                </h3>
+                <h3 className="mb-2 font-semibold text-foreground">B) Datos de pago</h3>
                 <p className="mb-2 text-muted-foreground">
-                  <strong className="text-foreground">No procesamos ni almacenamos datos de tarjetas de crédito o débito.</strong>{" "}
+                  <strong className="text-foreground">
+                    No procesamos ni almacenamos datos de tarjetas de crédito o débito.
+                  </strong>{' '}
                   Los pagos son manuales. Recopilamos únicamente:
                 </p>
                 <ul className="ml-5 list-disc space-y-1 text-muted-foreground">
-                  <li>
-                    Método de pago elegido: efectivo, transferencia bancaria o pago móvil
-                  </li>
+                  <li>Método de pago elegido: efectivo, transferencia bancaria o pago móvil</li>
                   <li>Referencia de pago reportada por el cliente</li>
                   <li>Monto declarado por el cliente en moneda local (VES)</li>
                   <li>
@@ -151,9 +142,7 @@ export default function PrivacyPolicyPage() {
                 </h3>
                 <ul className="ml-5 list-disc space-y-1 text-muted-foreground">
                   <li>Nombre, apellido y correo electrónico</li>
-                  <li>
-                    Contraseña (almacenada con hash criptográfico; nunca en texto plano)
-                  </li>
+                  <li>Contraseña (almacenada con hash criptográfico; nunca en texto plano)</li>
                   <li>Número de teléfono (opcional)</li>
                   <li>Foto de perfil (opcional)</li>
                   <li>
@@ -165,9 +154,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h3 className="mb-2 font-semibold text-foreground">
-                  E) Datos de eventos
-                </h3>
+                <h3 className="mb-2 font-semibold text-foreground">E) Datos de eventos</h3>
                 <ul className="ml-5 list-disc space-y-1 text-muted-foreground">
                   <li>Título, descripción, fecha y ubicación del evento</li>
                   <li>URL de streaming (si aplica)</li>
@@ -177,15 +164,11 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h3 className="mb-2 font-semibold text-foreground">
-                  F) Datos técnicos
-                </h3>
+                <h3 className="mb-2 font-semibold text-foreground">F) Datos técnicos</h3>
                 <ul className="ml-5 list-disc space-y-1 text-muted-foreground">
                   <li>Tokens de sesión (refresh tokens con fecha de expiración)</li>
                   <li>Tokens QR únicos por entrada, utilizados para validación en puerta</li>
-                  <li>
-                    Registro de uso de QR: fecha, hora de escaneo y quién realizó el escaneo
-                  </li>
+                  <li>Registro de uso de QR: fecha, hora de escaneo y quién realizó el escaneo</li>
                 </ul>
               </div>
             </div>
@@ -196,7 +179,9 @@ export default function PrivacyPolicyPage() {
             <h2 className="mb-4 text-xl font-semibold text-foreground">
               3. Finalidad del tratamiento
             </h2>
-            <p className="mb-4">Utilizamos los datos recopilados para las siguientes finalidades:</p>
+            <p className="mb-4">
+              Utilizamos los datos recopilados para las siguientes finalidades:
+            </p>
             <ol className="ml-5 list-decimal space-y-2 text-muted-foreground">
               <li>Procesar y confirmar la compra de entradas.</li>
               <li>Enviar las entradas al comprador por correo electrónico (en formato PDF/QR).</li>
@@ -235,9 +220,7 @@ export default function PrivacyPolicyPage() {
 
             <div className="space-y-5">
               <div className="rounded-lg border border-border bg-card p-4">
-                <h3 className="mb-1 font-semibold text-foreground">
-                  Resend (resend.com)
-                </h3>
+                <h3 className="mb-1 font-semibold text-foreground">Resend (resend.com)</h3>
                 <p className="text-muted-foreground">
                   Servicio de envío de correos electrónicos transaccionales. Recibe la dirección de
                   correo del destinatario y el contenido del mensaje (entradas, invitaciones de
@@ -252,8 +235,8 @@ export default function PrivacyPolicyPage() {
                 </h3>
                 <p className="text-muted-foreground">
                   Utilizamos Google AdSense para mostrar publicidad en nuestra plataforma. Google
-                  puede utilizar cookies y tecnologías similares para mostrar anuncios basados en tus
-                  visitas anteriores a este u otros sitios web. Consulta la sección 5 de esta
+                  puede utilizar cookies y tecnologías similares para mostrar anuncios basados en
+                  tus visitas anteriores a este u otros sitios web. Consulta la sección 5 de esta
                   política para más información.
                 </p>
               </div>
@@ -263,8 +246,10 @@ export default function PrivacyPolicyPage() {
                   Banco Central de Venezuela (BCV)
                 </h3>
                 <p className="text-muted-foreground">
-                  Consultamos la tasa de cambio oficial a través de la API pública del BCV.{" "}
-                  <strong className="text-foreground">No transmitimos ningún dato de usuarios</strong>{" "}
+                  Consultamos la tasa de cambio oficial a través de la API pública del BCV.{' '}
+                  <strong className="text-foreground">
+                    No transmitimos ningún dato de usuarios
+                  </strong>{' '}
                   a este organismo; es una consulta unidireccional de datos públicos.
                 </p>
               </div>
@@ -291,16 +276,16 @@ export default function PrivacyPolicyPage() {
               servicio y expiran automáticamente.
             </p>
 
-            <h3 className="mb-2 font-semibold text-foreground">Cookies de terceros — Google AdSense</h3>
+            <h3 className="mb-2 font-semibold text-foreground">
+              Cookies de terceros — Google AdSense
+            </h3>
             <p className="mb-3 text-muted-foreground">
-              Esta plataforma utiliza Google AdSense, un servicio de publicidad de Google LLC. Google
-              AdSense emplea cookies de DoubleClick para mostrar anuncios personalizados basados en
-              tu historial de navegación. Esto significa que Google puede:
+              Esta plataforma utiliza Google AdSense, un servicio de publicidad de Google LLC.
+              Google AdSense emplea cookies de DoubleClick para mostrar anuncios personalizados
+              basados en tu historial de navegación. Esto significa que Google puede:
             </p>
             <ul className="mb-4 ml-5 list-disc space-y-1 text-muted-foreground">
-              <li>
-                Utilizar cookies para recordar tu actividad en este y otros sitios web.
-              </li>
+              <li>Utilizar cookies para recordar tu actividad en este y otros sitios web.</li>
               <li>
                 Mostrar anuncios adaptados a tus intereses inferidos a partir de dicha actividad.
               </li>
@@ -309,7 +294,9 @@ export default function PrivacyPolicyPage() {
               </li>
             </ul>
 
-            <h3 className="mb-2 font-semibold text-foreground">Cómo controlar las cookies publicitarias</h3>
+            <h3 className="mb-2 font-semibold text-foreground">
+              Cómo controlar las cookies publicitarias
+            </h3>
             <p className="mb-3 text-muted-foreground">
               Puedes optar por no recibir publicidad personalizada de Google visitando:
             </p>
@@ -360,17 +347,17 @@ export default function PrivacyPolicyPage() {
                 </thead>
                 <tbody className="divide-y divide-border">
                   {[
-                    ["Tokens de sesión", "Expiran automáticamente según configuración del sistema"],
-                    ["Códigos OTP", "Expiran en minutos y se invalidan tras su primer uso"],
-                    ["Invitaciones de staff", "Expiran a las 48 horas de su emisión"],
-                    ["Tokens de lista de espera", "Expiran según la configuración del organizador"],
+                    ['Tokens de sesión', 'Expiran automáticamente según configuración del sistema'],
+                    ['Códigos OTP', 'Expiran en minutos y se invalidan tras su primer uso'],
+                    ['Invitaciones de staff', 'Expiran a las 48 horas de su emisión'],
+                    ['Tokens de lista de espera', 'Expiran según la configuración del organizador'],
                     [
-                      "Datos de compradores y órdenes",
-                      "Retenidos mientras la cuenta del organizador esté activa",
+                      'Datos de compradores y órdenes',
+                      'Retenidos mientras la cuenta del organizador esté activa',
                     ],
                     [
-                      "Datos de organizadores",
-                      "Retenidos mientras la cuenta esté activa; eliminados a solicitud del usuario",
+                      'Datos de organizadores',
+                      'Retenidos mientras la cuenta esté activa; eliminados a solicitud del usuario',
                     ],
                   ].map(([tipo, periodo]) => (
                     <tr key={tipo} className="bg-card hover:bg-muted/30">
@@ -414,33 +401,31 @@ export default function PrivacyPolicyPage() {
 
           {/* 8 */}
           <section id="derechos-usuario">
-            <h2 className="mb-4 text-xl font-semibold text-foreground">
-              8. Derechos del usuario
-            </h2>
+            <h2 className="mb-4 text-xl font-semibold text-foreground">8. Derechos del usuario</h2>
             <p className="mb-4">
               Como titular de los datos personales que tratamos, tienes los siguientes derechos:
             </p>
             <div className="space-y-3">
               {[
                 {
-                  title: "Acceso",
-                  desc: "Puedes solicitarnos información sobre los datos personales que tenemos sobre ti y cómo los utilizamos.",
+                  title: 'Acceso',
+                  desc: 'Puedes solicitarnos información sobre los datos personales que tenemos sobre ti y cómo los utilizamos.',
                 },
                 {
-                  title: "Rectificación",
-                  desc: "Puedes solicitarnos la corrección de datos inexactos o incompletos.",
+                  title: 'Rectificación',
+                  desc: 'Puedes solicitarnos la corrección de datos inexactos o incompletos.',
                 },
                 {
-                  title: "Eliminación",
-                  desc: "Puedes solicitarnos la eliminación de tus datos personales cuando ya no sean necesarios para las finalidades para las que fueron recogidos, o cuando retires tu consentimiento.",
+                  title: 'Eliminación',
+                  desc: 'Puedes solicitarnos la eliminación de tus datos personales cuando ya no sean necesarios para las finalidades para las que fueron recogidos, o cuando retires tu consentimiento.',
                 },
                 {
-                  title: "Oposición y limitación",
-                  desc: "Puedes oponerte al tratamiento de tus datos o solicitar que lo limitemos en determinadas circunstancias.",
+                  title: 'Oposición y limitación',
+                  desc: 'Puedes oponerte al tratamiento de tus datos o solicitar que lo limitemos en determinadas circunstancias.',
                 },
                 {
-                  title: "Portabilidad",
-                  desc: "Puedes solicitar una copia de tus datos en un formato estructurado y de uso común.",
+                  title: 'Portabilidad',
+                  desc: 'Puedes solicitar una copia de tus datos en un formato estructurado y de uso común.',
                 },
               ].map(({ title, desc }) => (
                 <div key={title} className="rounded-lg border border-border bg-card p-4">
@@ -450,31 +435,29 @@ export default function PrivacyPolicyPage() {
               ))}
             </div>
             <p className="mt-4 text-muted-foreground">
-              Para ejercer cualquiera de estos derechos, escríbenos a{" "}
+              Para ejercer cualquiera de estos derechos, escríbenos a{' '}
               <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary hover:underline">
                 {CONTACT_EMAIL}
               </a>
               . Responderemos dentro de un plazo razonable conforme a la normativa venezolana
-              aplicable, en particular la{" "}
+              aplicable, en particular la{' '}
               <strong className="text-foreground">
                 Ley Especial contra los Delitos Informáticos (LECDI)
-              </strong>{" "}
+              </strong>{' '}
               y demás normativas de protección de datos vigentes.
             </p>
           </section>
 
           {/* 9 */}
           <section id="menores-edad">
-            <h2 className="mb-4 text-xl font-semibold text-foreground">
-              9. Menores de edad
-            </h2>
+            <h2 className="mb-4 text-xl font-semibold text-foreground">9. Menores de edad</h2>
             <p className="text-muted-foreground">
               {SERVICE_NAME} no está dirigido a menores de 18 años. No recopilamos conscientemente
               datos personales de menores de edad. Si eres padre, madre o tutor y crees que tu hijo
-              nos ha proporcionado datos personales, contáctanos a{" "}
+              nos ha proporcionado datos personales, contáctanos a{' '}
               <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary hover:underline">
                 {CONTACT_EMAIL}
-              </a>{" "}
+              </a>{' '}
               para que podamos eliminar dicha información.
             </p>
           </section>
@@ -495,9 +478,7 @@ export default function PrivacyPolicyPage() {
 
           {/* 11 */}
           <section id="contacto">
-            <h2 className="mb-4 text-xl font-semibold text-foreground">
-              11. Contacto
-            </h2>
+            <h2 className="mb-4 text-xl font-semibold text-foreground">11. Contacto</h2>
             <p className="mb-3 text-muted-foreground">
               Si tienes preguntas, solicitudes o inquietudes relacionadas con esta Política de
               Privacidad o con el tratamiento de tus datos personales, puedes contactarnos:

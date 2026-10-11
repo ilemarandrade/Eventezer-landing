@@ -1,49 +1,78 @@
-"use client";
+'use client';
 
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { ScrollReveal } from "@/components/landing/scroll-reveal";
+} from '@/components/ui/accordion';
+import { ScrollReveal } from '@/components/landing/scroll-reveal';
+import { useCountry } from '@/components/providers/country-provider';
+import type { Country } from '@/lib/country';
 
-const faqs = [
+interface FaqItem {
+  q: string;
+  a: string;
+  /** Países a los que aplica esta pregunta. Si se omite, se muestra en todos. */
+  countries?: Country[];
+}
+
+const faqs: FaqItem[] = [
   {
-    q: "¿Cómo sé qué plan me conviene?",
-    a: "Usa la sección Calculadora con tus eventos por mes, tickets por evento y precio promedio. Te sugerimos el plan con menor costo total estimado (suscripción + comisión).",
+    q: '¿Cómo sé qué plan me conviene?',
+    a: 'Usa la sección Calculadora con tus eventos por mes, tickets por evento y precio promedio. Te sugerimos el plan con menor costo total estimado (suscripción + comisión).',
+    countries: ['VE'],
   },
   {
-    q: "¿Cuándo se aplica la comisión por entrada?",
-    a: "Solo sobre órdenes en estado APROBADO. Reservas, pendientes de pago o canceladas no generan comisión.",
+    q: '¿Cómo sé qué plan me conviene?',
+    a: 'Usa la sección Calculadora con tus eventos por mes, boletas por evento y precio promedio. Te sugerimos el plan con menor costo total estimado: suscripción + comisión (porcentaje del precio + $500 por boleta vendida).',
+    countries: ['CO'],
   },
   {
-    q: "¿Puedo cambiar de plan en cualquier momento?",
-    a: "Sí. Puedes empezar en Free y migrar a Starter o Pro cuando tu volumen crezca. El cambio se refleja en tu siguiente ciclo de facturación.",
+    q: '¿Cuándo se aplica la comisión por entrada?',
+    a: 'Solo sobre órdenes en estado APROBADO. Reservas, pendientes de pago o canceladas no generan comisión.',
+    countries: ['VE'],
   },
   {
-    q: "¿Qué gano al subir de plan?",
-    a: "Más eventos activos simultáneos, más staff, menor comisión por ticket y acceso a funciones avanzadas como analítica completa y waitlist avanzada en Pro.",
+    q: '¿Cuánto cobra Eventezer por boleta y cuándo?',
+    a: 'Por cada boleta vendida cobramos un porcentaje del precio según tu plan (Free 9%, Starter 6%, Pro 4%) más un cargo fijo de $500. Solo se aplica sobre órdenes en estado APROBADO; reservas, pendientes de pago o canceladas no generan comisión.',
+    countries: ['CO'],
   },
   {
-    q: "¿Cómo recibe el asistente su entrada?",
-    a: "Al completar la compra, el asistente recibe automáticamente un correo con su entrada y código QR. Esto aplica en todos los planes sin configuración adicional.",
+    q: '¿Quién paga la pasarela de pago?',
+    a: 'Los pagos se procesan con Wompi, que cobra 2,65% + $700 + IVA (19%) por transacción. Ese valor lo paga el comprador al momento de la compra y va directo a Wompi: Eventezer no recibe nada de él. Como una transacción puede incluir varias boletas, el costo por boleta varía según cuántas se compren juntas.',
+    countries: ['CO'],
   },
   {
-    q: "¿Qué pasa si un asistente pierde o no encuentra su entrada?",
-    a: "El organizador puede reenviar la entrada o validar al asistente manualmente desde el panel de control sin necesidad de cancelar ni reemitir la orden.",
+    q: '¿Puedo cambiar de plan en cualquier momento?',
+    a: 'Sí. Puedes empezar en Free y migrar a Starter o Pro cuando tu volumen crezca. El cambio se refleja en tu siguiente ciclo de facturación.',
   },
   {
-    q: "¿Puedo crear entradas gratuitas?",
-    a: "Sí. Puedes crear tipos de ticket con precio $0 para eventos de registro gratuito. Las entradas gratuitas no generan comisión.",
+    q: '¿Qué gano al subir de plan?',
+    a: 'Más eventos activos simultáneos, más staff, menor comisión por ticket y acceso a funciones avanzadas como analítica completa y waitlist avanzada en Pro.',
   },
   {
-    q: "¿Puedo cambiar el precio de las entradas después de publicar?",
-    a: "Sí. Puedes modificar el precio de un tipo de ticket en cualquier momento. El cambio aplica a nuevas ventas y no afecta órdenes ya aprobadas.",
+    q: '¿Cómo recibe el asistente su entrada?',
+    a: 'Al completar la compra, el asistente recibe automáticamente un correo con su entrada y código QR. Esto aplica en todos los planes sin configuración adicional.',
+  },
+  {
+    q: '¿Qué pasa si un asistente pierde o no encuentra su entrada?',
+    a: 'El organizador puede reenviar la entrada o validar al asistente manualmente desde el panel de control sin necesidad de cancelar ni reemitir la orden.',
+  },
+  {
+    q: '¿Puedo crear entradas gratuitas?',
+    a: 'Sí. Puedes crear tipos de ticket con precio $0 para eventos de registro gratuito. Las entradas gratuitas no generan comisión.',
+  },
+  {
+    q: '¿Puedo cambiar el precio de las entradas después de publicar?',
+    a: 'Sí. Puedes modificar el precio de un tipo de ticket en cualquier momento. El cambio aplica a nuevas ventas y no afecta órdenes ya aprobadas.',
   },
 ];
 
 export function LandingFaq() {
+  const { country } = useCountry();
+  const visibleFaqs = faqs.filter((item) => !item.countries || item.countries.includes(country));
+
   return (
     <section id="faq" className="bg-background px-4 py-16 sm:py-20">
       <div className="mx-auto max-w-3xl">
@@ -52,8 +81,7 @@ export function LandingFaq() {
             Preguntas frecuentes
           </h2>
           <p className="mt-3 text-center text-muted-foreground">
-            Lo esencial para elegir plan y escalar con control. Tambien puedes ir
-            directo a la{" "}
+            Lo esencial para elegir plan y escalar con control. Tambien puedes ir directo a la{' '}
             <a
               href="#calculadora"
               className="font-medium text-primary underline underline-offset-4"
@@ -65,7 +93,7 @@ export function LandingFaq() {
         </ScrollReveal>
         <ScrollReveal delay={0.08} className="mt-10">
           <Accordion type="single" collapsible className="w-full">
-            {faqs.map((item, i) => (
+            {visibleFaqs.map((item, i) => (
               <AccordionItem key={item.q} value={`item-${i}`}>
                 <AccordionTrigger>{item.q}</AccordionTrigger>
                 <AccordionContent>{item.a}</AccordionContent>
