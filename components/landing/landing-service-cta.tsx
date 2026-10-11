@@ -9,16 +9,14 @@ import { HeadphonesIcon } from 'lucide-react';
 import { ScrollReveal } from '@/components/landing/scroll-reveal';
 import { BackgroundVideo } from '@/components/landing/background-video';
 
-// Video de ejemplo (Mixkit, licencia gratuita): reemplazar por uno del equipo operativo en un evento.
-const SERVICE_VIDEO_SRC = 'https://assets.mixkit.co/videos/4043/4043-720.mp4';
-const SERVICE_VIDEO_POSTER = 'https://assets.mixkit.co/videos/4043/4043-thumb-720-0.jpg';
+const SERVICE_VIDEO_SRC = '/videos/without-staff.mp4';
 
 export function LandingServiceCta() {
   return (
     // `dark` fuerza texto claro sobre el video, sin importar el tema.
     <section className="dark relative overflow-hidden border-b border-border bg-black px-4 py-20 text-foreground sm:py-28">
       <div aria-hidden className="absolute inset-0">
-        <BackgroundVideo src={SERVICE_VIDEO_SRC} poster={SERVICE_VIDEO_POSTER} />
+        <BackgroundVideo src={SERVICE_VIDEO_SRC} />
       </div>
       <div className="pointer-events-none absolute inset-0 bg-black/60" />
       <div className="relative mx-auto max-w-4xl">
