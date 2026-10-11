@@ -4,6 +4,7 @@ import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { CountryProvider } from '@/components/providers/country-provider';
 import { CountrySelectDialog } from '@/components/landing/country-select-dialog';
+import { EventlynWidget } from '@/components/eventlyn/eventlyn-widget';
 import './globals.css';
 import { FacebookPixel } from '@/components/pixel/FaceboookPixel';
 
@@ -52,6 +53,7 @@ export default function RootLayout({
             <FacebookPixel />
             {children}
             <CountrySelectDialog />
+            <EventlynWidget />
             <Toaster richColors position="top-center" closeButton />
           </CountryProvider>
         </ThemeProvider>

@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { LogoSwitcher } from '@/components/landing/logo-switcher';
 import { CountrySwitcher } from '@/components/landing/country-switcher';
 import { Button } from '@/components/ui/button';
@@ -12,6 +12,7 @@ import { APP_LOGIN_URL, APP_REGISTER_URL } from '@/lib/constants';
 import { trackPixelEvent } from '@/lib/pixel';
 import { useCountry } from '@/components/providers/country-provider';
 import { COUNTRIES } from '@/lib/country';
+import { cn } from '@/lib/utils';
 
 const links = [
   { href: '/#caracteristicas', label: 'Características' },
@@ -38,20 +39,48 @@ function ThemeToggleButton() {
   );
 }
 
-export function LandingNavbar() {
+/** `overHero`: la navbar arranca transparente sobre el Hero con video y se vuelve sólida al pasarlo. */
+export function LandingNavbar({ overHero = false }: { overHero?: boolean }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
+  const { scrollY } = useScroll();
+  const updatePastHero = (y: number) => {
+    if (overHero) setPastHero(y > window.innerHeight - 80);
+  };
+  useMotionValueEvent(scrollY, 'change', updatePastHero);
+  // Al recargar a mitad de página no hay evento de scroll inicial.
+  useEffect(() => updatePastHero(window.scrollY), []);
+  const transparent = overHero && !pastHero && !mobileOpen;
   const closeMobile = () => setMobileOpen(false);
   const { country } = useCountry();
   const { signupEnabled } = COUNTRIES[country];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background">
+    <header
+      className={cn(
+        'sticky top-0 z-50 w-full transition-colors duration-300',
+        // `dark` fuerza texto claro mientras está sobre el video.
+        transparent ? 'dark border-transparent bg-transparent' : 'border-border bg-background',
+      )}
+    >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <LogoSwitcher />
+        <LogoSwitcher forceDark={transparent} />
 
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
+        <nav
+          className={cn(
+            'hidden md:flex items-center gap-8 text-sm font-medium',
+            transparent ? 'text-white' : 'text-muted-foreground',
+          )}
+        >
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="transition-colors hover:text-foreground">
+            <Link
+              key={l.href}
+              href={l.href}
+              className={cn(
+                'transition-colors',
+                transparent ? 'hover:text-white/75' : 'hover:text-foreground',
+              )}
+            >
               {l.label}
             </Link>
           ))}
@@ -59,7 +88,7 @@ export function LandingNavbar() {
 
         {/* Desktop: todos los controles a la vista */}
         <div className="hidden items-center gap-3 md:flex">
-          <CountrySwitcher />
+          <CountrySwitcher className={cn(transparent && '[&>button_svg]:text-white')} />
           <ThemeToggleButton />
           {signupEnabled ? (
             <>
