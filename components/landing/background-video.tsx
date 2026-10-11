@@ -6,13 +6,13 @@ import { cn } from '@/lib/utils';
 
 type BackgroundVideoProps = {
   src: string;
-  poster: string;
+  poster?: string;
   className?: string;
 };
 
 /**
  * Video decorativo en loop (sin audio). Solo se reproduce mientras está visible
- * y, con `prefers-reduced-motion`, se queda en el poster.
+ * y, con `prefers-reduced-motion`, se queda en el poster (o el primer frame).
  */
 export function BackgroundVideo({ src, poster, className }: BackgroundVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
