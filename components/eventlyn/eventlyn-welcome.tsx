@@ -22,7 +22,7 @@ export function EventlynWelcome({
   return (
     <EventlynMessageBubble author="assistant">
       <p>
-        ¡Hola! 👋 Soy <strong>Eventlyn</strong>, tu asistente virtual. Bienvenido a{' '}
+        ¡Hola! 👋 Soy <strong>Evelyn</strong>, tu asistente virtual. Bienvenido a{' '}
         <strong>Eventezer</strong> ✨
       </p>
       <p className="mt-1.5">

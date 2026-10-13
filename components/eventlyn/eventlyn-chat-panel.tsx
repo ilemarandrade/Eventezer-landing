@@ -16,7 +16,7 @@ interface EventlynChatPanelProps {
 export function EventlynChatPanel({ chat, onClose }: EventlynChatPanelProps) {
   return (
     <section
-      aria-label="Chat con Eventlyn"
+      aria-label="Chat con Evelyn"
       className="flex h-[min(600px,calc(100dvh-7rem))] w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-3xl border bg-card text-card-foreground shadow-2xl sm:w-[380px]"
     >
       <EventlynHeader

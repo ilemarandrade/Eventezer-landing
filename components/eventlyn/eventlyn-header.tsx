@@ -13,7 +13,7 @@ export function EventlynHeader({ isOnline, canRestart, onRestart, onClose }: Eve
     <header className="flex items-center gap-3 border-b bg-gradient-to-r from-primary/10 to-fuchsia-500/10 px-4 py-3">
       <EventlynAvatar online={isOnline} />
       <div className="min-w-0 flex-1">
-        <p className="font-semibold leading-tight">Eventlyn</p>
+        <p className="font-semibold leading-tight">Evelyn</p>
         <p className="truncate text-xs text-muted-foreground">
           {isOnline
             ? 'Asistente virtual de Eventezer · En línea'

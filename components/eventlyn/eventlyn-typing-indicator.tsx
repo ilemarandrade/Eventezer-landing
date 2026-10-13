@@ -4,7 +4,7 @@ export function EventlynTypingIndicator({ label }: { label?: string | null }) {
     <span
       className="flex items-center gap-2"
       role="status"
-      aria-label={label ?? 'Eventlyn está escribiendo'}
+      aria-label={label ?? 'Evelyn está escribiendo'}
     >
       <span className="flex gap-1">
         {[0, 150, 300].map((delay) => (

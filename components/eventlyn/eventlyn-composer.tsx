@@ -54,7 +54,7 @@ export function EventlynComposer({
           onKeyDown={handleKeyDown}
           rows={1}
           placeholder="Escribe tu mensaje…"
-          aria-label="Mensaje para Eventlyn"
+          aria-label="Mensaje para Evelyn"
           className="max-h-[140px] flex-1 resize-none bg-transparent py-1 text-sm outline-none placeholder:text-muted-foreground"
         />
         {isStreaming ? (

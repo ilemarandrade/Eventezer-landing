@@ -41,7 +41,7 @@ export function EventlynLauncher({ isOpen, onToggle }: EventlynLauncherProps) {
               <X className="h-3 w-3" />
             </button>
             <button type="button" onClick={handleToggle} className="text-left">
-              <span className="font-semibold">¡Hola! Soy Eventlyn 👋</span>
+              <span className="font-semibold">¡Hola! Soy Evelyn 👋</span>
               <br />
               <span className="text-muted-foreground">¿Te ayudo con tu evento?</span>
             </button>
@@ -71,7 +71,7 @@ export function EventlynLauncher({ isOpen, onToggle }: EventlynLauncherProps) {
         <motion.button
           type="button"
           onClick={handleToggle}
-          aria-label={isOpen ? 'Cerrar chat con Eventlyn' : 'Abrir chat con Eventlyn'}
+          aria-label={isOpen ? 'Cerrar chat con Evelyn' : 'Abrir chat con Evelyn'}
           aria-expanded={isOpen}
           className="relative flex h-14 w-14 items-center justify-center rounded-full shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           whileHover={reduceMotion ? undefined : { scale: 1.08 }}

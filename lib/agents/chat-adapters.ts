@@ -4,8 +4,8 @@ import type { ChatMessage, ChatNotice } from '@/lib/agents/chat-model';
 
 /** Nombres amables de los agentes del backend (el historial solo trae `agentKey`). */
 const AGENT_NAMES: Record<string, string> = {
-  'faq-assistant': 'Eventlyn',
-  'plan-advisor': 'Eventlyn · Asesora de planes',
+  'faq-assistant': 'Evelyn',
+  'plan-advisor': 'Evelyn · Asesora de planes',
 };
 
 /** Texto que se muestra mientras el agente usa una herramienta. */
@@ -38,7 +38,7 @@ export function createLocalId(prefix: string): string {
 }
 
 export function getAgentDisplayName(agentKey: string | null | undefined): string {
-  return (agentKey && AGENT_NAMES[agentKey]) || 'Eventlyn';
+  return (agentKey && AGENT_NAMES[agentKey]) || 'Evelyn';
 }
 
 export function getToolLabel(toolName: string): string {
